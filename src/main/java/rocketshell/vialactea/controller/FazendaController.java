@@ -9,7 +9,7 @@ import rocketshell.vialactea.repository.FazendaRepository;
 import rocketshell.vialactea.service.FazendaService;
 
 @Controller
-@RequestMapping("/Fazendas")
+@RequestMapping("/fazendas")
 public class FazendaController extends BaseController<Fazenda,FazendaRepository,FazendaService> {
   
 }
