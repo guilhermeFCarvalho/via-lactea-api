@@ -1,24 +1,20 @@
 package rocketshell.vialactea.domain;
-import java.util.List;
 
 import javax.persistence.Entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-
+import rocketshell.vialactea.base.BaseEntity;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Produtor extends Pessoa{
+public class Propriedade extends BaseEntity {
 
-    private Pessoa pessoa;
-    private Usuario usuario;
-    private List<Propriedade> propriedades;
-    
-    
+    private String car;
+    private String telefone;
+    private Fazenda fazenda;
+    private Produtor produtor;
 }
-
