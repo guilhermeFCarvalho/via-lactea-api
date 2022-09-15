@@ -4,7 +4,12 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
         
-    <changeSet id="0" author="rodrigo.bueno">
+    <changeSet id="20220914-2202-17270" author="rodrigo.bueno">
+       <preConditions  onFail="MARK_RAN">
+            <not>
+              <tableExists tableName="endereco"/>
+            </not>
+        </preConditions>
        <createTable tableName="endereco">
           <column name="id" type="numeric(10,0)">
               <constraints nullable="false" primaryKey="true" primaryKeyName="pk_endereco"/>
@@ -12,7 +17,6 @@
           <column name="cidade" type="varchar(100)"></column>
           <column name="bairro" type="varchar(100)"></column>
           <column name="rua" type="varchar(100)"></column>
-          <column name="numero" type="varchar(8)"></column>
           <column name="cep" type="varchar(8)"></column>
        </createTable>
     </changeSet>
