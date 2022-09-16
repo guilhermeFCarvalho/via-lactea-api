@@ -19,6 +19,6 @@ public class ReciboDeVenda extends BaseEntity {
   private BigDecimal quantidadeLeiteVendida;
   private Date dataDaVenda;
   private String observacoes;
-  private boolean pago;
+  private Boolean pago;
 
 }
