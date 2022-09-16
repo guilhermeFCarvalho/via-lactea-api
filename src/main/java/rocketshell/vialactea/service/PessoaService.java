@@ -4,15 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import rocketshell.vialactea.base.BaseService;
-import rocketshell.vialactea.domain.Produtor;
-import rocketshell.vialactea.repository.ProdutorRepository;
+import rocketshell.vialactea.domain.Pessoa;
+import rocketshell.vialactea.repository.PessoaRepository;
 
 
 @Service
-public class ProdutorService extends BaseService<Produtor, ProdutorRepository>{
+public class PessoaService extends BaseService<Pessoa, PessoaRepository>{
 
     @Autowired
-    private ProdutorRepository repository;
+    private PessoaRepository repository;
 
 
     
