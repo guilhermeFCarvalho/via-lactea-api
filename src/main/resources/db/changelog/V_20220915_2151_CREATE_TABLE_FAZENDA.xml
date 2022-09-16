@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        
+  <changeSet id="20220915-2151-17271" author="julio.treichel">
+    <preConditions  onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="fazenda"/>
+      </not>
+    </preConditions>
+    <createTable tableName="fazenda">
+      <column name="id" type="numeric(10,0)">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pk_fazenda"/>
+      </column>
+      <column name="nomeDaFazenda" type="varchar(100)"></column>
+      <column name="telefone" type="varchar(100)"></column>
+      <column name="car" type="varchar(100)"></column>
+    </createTable>
+  </changeSet>
+	
+</databaseChangeLog>
