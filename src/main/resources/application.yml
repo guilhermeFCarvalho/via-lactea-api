@@ -1,0 +1,29 @@
+#debug: true
+
+info:
+  app:
+    name: Via Láctea API
+spring:
+  application:
+    name: via-lactea-api
+
+  main:
+    allow-bean-definition-overriding: true
+
+  jpa:
+    showSql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+        show_sql: true
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    contexts: default
+    change-log: classpath:db/changelog-master.xml
+    parameters:
+      tablespace_index: ''
+
+server:
+  port: 9001
