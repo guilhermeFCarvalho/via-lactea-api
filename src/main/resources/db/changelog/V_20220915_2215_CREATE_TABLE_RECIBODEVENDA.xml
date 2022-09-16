@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        
+    <changeSet id="20220915-2215-17273" author="julio.treichel">
+       <preConditions  onFail="MARK_RAN">
+            <not>
+              <tableExists tableName="recibodevenda"/>
+            </not>
+        </preConditions>
+       <createTable tableName="recibodevenda">
+          <column name="id" type="numeric(10,0)">
+              <constraints nullable="false" primaryKey="true" primaryKeyName="pk_recibodevenda"/>
+          </column>
+          <column name="quantidadeDeLeite" type="numeric(19,2)"></column>
+          <column name="dataDaVenda" type="timestamp"></column>
+          <column name="observacoes" type="varchar(150)"></column>
+          <column name="pago" type="boolean"></column>
+       </createTable>
+    </changeSet>
+	
+</databaseChangeLog>
