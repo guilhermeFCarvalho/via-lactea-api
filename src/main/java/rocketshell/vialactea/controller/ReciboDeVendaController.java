@@ -9,7 +9,7 @@ import rocketshell.vialactea.repository.ReciboDeVendaRepository;
 import rocketshell.vialactea.service.ReciboDeVendaService;
 
 @Controller
-@RequestMapping("/coletas")
+@RequestMapping("/recibo-de-venda")
 public class ReciboDeVendaController extends BaseController<ReciboDeVenda, ReciboDeVendaRepository, ReciboDeVendaService>{
   
 }

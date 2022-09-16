@@ -1,5 +1,6 @@
 package rocketshell.vialactea.domain;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import javax.persistence.Entity;
@@ -15,7 +16,7 @@ import rocketshell.vialactea.base.BaseEntity;
 @Entity
 public class ReciboDeVenda extends BaseEntity {
 
-  private float quantidadeLeiteVendida;
+  private BigDecimal quantidadeLeiteVendida;
   private Date dataDaVenda;
   private String observacoes;
   private boolean pago;
