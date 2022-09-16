@@ -1,0 +1,31 @@
+<?<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        
+    <changeSet id="20220915-2145-17272" author="guilherme.carvalho">
+        <preConditions onFail="MARK_RAN">
+            <not>
+              <tableExists tableName="pessoa_fisica"/>
+            </not>
+        </preConditions>
+        <createTable tableName="pessoa_fisica">
+            <column name="id" type="numeric(10,0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_pessoa_fisica"/>
+            </column>
+            <column name="pessoa" type="numeric(10,0)">
+                <constraints nullable="false" foreignKeyName="fk_pessoa" references="pessoa(id)"/>
+            </column> 
+            <column name="nome" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sobrenome" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cpf" type="varchar(11)">
+                <constraints nullable="false"/>
+            </column>     
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

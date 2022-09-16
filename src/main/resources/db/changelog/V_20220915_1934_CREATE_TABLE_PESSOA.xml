@@ -6,9 +6,9 @@
         
     <changeSet id="20220915-1935-17272" author="guilherme.carvalho">
       <preConditions  onFail="MARK_RAN">
-            <not>
-              <tableExists tableName="pessoa"/>
-            </not>
+        <not>
+          <tableExists tableName="pessoa"/>
+        </not>
       </preConditions>
       <createTable tableName="pessoa">
         <column name="id" type="numeric(10,0)">
@@ -18,9 +18,5 @@
           <constraints nullable="false"/>
         </column>
       </createTable>
-
-        
-
     </changeSet>
-	
 </databaseChangeLog>
