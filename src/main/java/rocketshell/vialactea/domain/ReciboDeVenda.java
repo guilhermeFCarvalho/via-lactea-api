@@ -15,8 +15,8 @@ import rocketshell.vialactea.base.BaseEntity;
 @Entity
 public class ReciboDeVenda extends BaseEntity {
 
-  private int asdf;
-  private Date dataDaColeta;
+  private float quantidadeLeiteVendida;
+  private Date dataDaVenda;
   private String observacoes;
   private boolean pago;
 
