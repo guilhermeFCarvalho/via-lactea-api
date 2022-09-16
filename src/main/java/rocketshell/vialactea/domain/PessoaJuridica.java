@@ -1,8 +1,15 @@
 package rocketshell.vialactea.domain;
 
-import lombok.Data;
+import javax.persistence.Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PessoaJuridica extends Pessoa {
     private String razaoSocial;
     private String telefone;
