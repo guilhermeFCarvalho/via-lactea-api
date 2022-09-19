@@ -1,4 +1,4 @@
-<?<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
@@ -15,7 +15,7 @@
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_pessoa_fisica"/>
             </column>
             <column name="pessoa" type="numeric(10,0)">
-                <constraints nullable="false" foreignKeyName="fk_pessoa" references="pessoa(id)"/>
+                <constraints nullable="false"/>
             </column> 
             <column name="nome" type="varchar(100)">
                 <constraints nullable="false"/>
@@ -27,5 +27,12 @@
                 <constraints nullable="false"/>
             </column>     
         </createTable>
+        <addForeignKeyConstraint 
+            baseTableName="pessoa_fisica"
+            baseColumnName="pessoa_id"
+            constraintName="fk_pessoa"
+            referencedColumnNames="id"
+            referencedTableName = "pessoa"
+        />
     </changeSet>
 </databaseChangeLog>
