@@ -2,6 +2,7 @@ package rocketshell.vialactea.domain;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,6 +14,10 @@ import rocketshell.vialactea.base.BaseEntity;
 @AllArgsConstructor
 @NoArgsConstructor
 public abstract class Pessoa extends BaseEntity {
+
+    @OneToMany
     private List<Propriedade> propriedades;
+    
     private String telefone;
+
 }
