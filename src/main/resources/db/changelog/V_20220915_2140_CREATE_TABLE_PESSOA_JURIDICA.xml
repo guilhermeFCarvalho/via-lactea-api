@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        
+    <changeSet id="20220915-2140-17272" author="guilherme.carvalho">
+        <preConditions  onFail="MARK_RAN">
+            <not>
+              <tableExists tableName="pessoa_juridica"/>
+            </not>
+        </preConditions>
+        <createTable tableName="pessoa_juridica">
+            <column name="id" type="numeric(10,0)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_pessoa_juridica"/>
+            </column>
+            <column name="pessoa" type="numeric(10,0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cnpj" type="varchar(14)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="razao_social" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="inscricao_estadual" type="varchar(12)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint 
+            baseTableName="pessoa_juridica"
+            baseColumnName="pessoa_id"
+            constraintName="fk_pessoa"
+            referencedColumnNames="id"
+            referencedTableName = "pessoa"
+        />
+    </changeSet>
+</databaseChangeLog>
