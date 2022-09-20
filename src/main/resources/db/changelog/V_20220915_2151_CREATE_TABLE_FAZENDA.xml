@@ -14,9 +14,7 @@
       <column name="id" type="numeric(10,0)">
         <constraints nullable="false" primaryKey="true" primaryKeyName="pk_fazenda"/>
       </column>
-      <column name="endereco_id" type="number(10,0)">
-        <constraints nullable="false" foreignKeyName="fk_endereco" references="endereco(id)"/>
-      </column>
+      <column name="endereco_id" type="number(10,0)"> </column>
       <column name="nomeDaFazenda" type="varchar(100)"></column>
       <column name="telefone" type="varchar(100)"></column>
       <column name="car" type="varchar(100)"></column>
