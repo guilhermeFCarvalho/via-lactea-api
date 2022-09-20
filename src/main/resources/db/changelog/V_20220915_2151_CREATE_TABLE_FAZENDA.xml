@@ -14,7 +14,7 @@
       <column name="id" type="numeric(10,0)">
         <constraints nullable="false" primaryKey="true" primaryKeyName="pk_fazenda"/>
       </column>
-      <column name="endereco" type="number(10,0)">
+      <column name="endereco_id" type="number(10,0)">
         <constraints nullable="false" foreignKeyName="fk_endereco" references="endereco(id)"/>
       </column>
       <column name="nomeDaFazenda" type="varchar(100)"></column>
@@ -22,7 +22,7 @@
       <column name="car" type="varchar(100)"></column>
     </createTable>
     <addForeignKeyConstraint  baseColumnNames="endereco_id"
-      baseTableName="endereco"
+      baseTableName="fazenda"
       constraintName="fk_endereco"
       referencedColumnNames="id"
       referencedTableName="endereco"/>  
