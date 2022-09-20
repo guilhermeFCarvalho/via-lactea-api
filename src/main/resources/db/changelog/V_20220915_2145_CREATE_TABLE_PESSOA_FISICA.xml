@@ -14,7 +14,7 @@
             <column name="id" type="numeric(10,0)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_pessoa_fisica"/>
             </column>
-            <column name="pessoa" type="numeric(10,0)">
+            <column name="pessoa_id" type="numeric(10,0)">
                 <constraints nullable="false"/>
             </column> 
             <column name="nome" type="varchar(100)">
@@ -29,8 +29,8 @@
         </createTable>
         <addForeignKeyConstraint 
             baseTableName="pessoa_fisica"
-            baseColumnName="pessoa_id"
-            constraintName="fk_pessoa"
+            baseColumnNames="pessoa_id"
+            constraintName="fk_pessoa_2_pessoa_fisica"
             referencedColumnNames="id"
             referencedTableName = "pessoa"
         />
