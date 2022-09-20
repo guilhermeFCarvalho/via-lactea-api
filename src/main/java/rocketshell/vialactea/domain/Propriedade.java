@@ -15,7 +15,7 @@ import rocketshell.vialactea.base.BaseEntity;
 public class Propriedade extends BaseEntity {
 
     private String car;
-    
+
     private String telefone;
 
     @OneToOne
