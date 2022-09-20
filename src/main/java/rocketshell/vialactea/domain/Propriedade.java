@@ -16,5 +16,5 @@ public class Propriedade extends BaseEntity {
     private String car;
     private String telefone;
     private Fazenda fazenda;
-    private Produtor produtor;
+    private Pessoa produtor;
 }
