@@ -25,6 +25,12 @@ public class BaseController<
       return service.getById(id);
   }
 
+  @GetMapping("/pageable")
+  public Page<ENTITY> getAllPageable(Pageable pageable) {
+      return service.getAllPageable(pageable);
+  }
+
+
   @PostMapping
   public ENTITY create(@RequestBody ENTITY newEntity) {
       return service.create(newEntity);

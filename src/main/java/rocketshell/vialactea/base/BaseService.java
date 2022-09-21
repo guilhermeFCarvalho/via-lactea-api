@@ -24,6 +24,10 @@ public class BaseService <
       return repository.findById(id).get();
   }
 
+  public Page<ENTITY> getAllPageable(Pageable page) {
+      return repository.findAll(page);
+  }
+
   public ENTITY create (ENTITY newEntity) {
 
       return repository.save(newEntity);
