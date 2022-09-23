@@ -1,0 +1,23 @@
+{
+  "properties": [
+    {
+      "name": "rocket-shell.auth.admin.usename",
+      "type": "java.lang.String",
+      "description": "Description for rocket-shell.auth.admin.usename."
+    },
+    {
+      "name": "rocket-shell.auth.admin.password",
+      "type": "java.lang.String",
+      "description": "Description for rocket-shell.auth.admin.password."
+    },
+    {
+      "name": "rocket-shell.jwt.secret",
+      "type": "java.lang.String",
+      "description": "Description for rocket-shell.jwt.secret."
+    },
+    {
+      "name": "rocket-shell.jwt.expiration-ms",
+      "type": "java.lang.String",
+      "description": "Description for rocket-shell.jwt.expiration-ms."
+    }
+  ]}
