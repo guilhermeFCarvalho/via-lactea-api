@@ -13,7 +13,7 @@ import rocketshell.vialactea.base.BaseEntity;
 @Entity
 public class Fazenda extends BaseEntity {
   
-  private String nomeDaFaenda;
+  private String nomeDaFazenda;
   private String telefone;
   private String car;
 }
