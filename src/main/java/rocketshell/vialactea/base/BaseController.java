@@ -17,7 +17,7 @@ public class BaseController<
   @Autowired
   private SERVICE service;
 
-  @GetMapping
+  @GetMapping("/list")
   public List<ENTITY> getAll() {
       return service.getAll();
   }
@@ -27,7 +27,7 @@ public class BaseController<
       return service.getById(id);
   }
 
-  @GetMapping("/pageable")
+  @GetMapping
   public Page<ENTITY> getAllPageable(Pageable pageable) {
       return service.getAllPageable(pageable);
   }
