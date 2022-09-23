@@ -10,7 +10,7 @@ import rocketshell.vialactea.domain.Usuario;
 
 @RestController
 @RequestMapping("/api/usuario")
-public class UsersController {
+public class UsuarioController {
 
     @GetMapping("/me")
     public ResponseEntity<Usuario> getMe(@AuthenticationPrincipal Usuario user) {

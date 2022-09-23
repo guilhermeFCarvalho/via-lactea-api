@@ -24,7 +24,7 @@ import rocketshell.vialactea.service.UsuarioService;
 public class AuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
-    private UsuarioService usersService;
+    private UsuarioService usuarioService;
 
     @Autowired
     private JwtTool tokenTool;
@@ -45,7 +45,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             if (tokenTool.validateJwtToken(jwtToken.getToken())) {
                 String username = tokenTool.getUsernameFromToken(jwtToken);
 
-                UserDetails userDetails = usersService.loadUserByUsername(username);
+                UserDetails userDetails = usuarioService.loadUserByUsername(username);
 
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
                         null,

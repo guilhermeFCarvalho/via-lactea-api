@@ -53,13 +53,6 @@ public class Usuario implements UserDetails {
     @JsonProperty(access = Access.READ_ONLY)
     private Set<Roles> roles = new HashSet<>();
 
-    @NotEmpty
-    private String firstName;
-
-    private String lastName;
-
-    private LocalDate birtdate;
-
     @Email
     private String email;
 

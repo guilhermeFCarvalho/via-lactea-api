@@ -65,21 +65,15 @@ public class UsuarioService implements UserDetailsService {
     }
 
     public Usuario signUp(SignUp signUp) {
-        if (usuarioRepository.existsByUsername(signUp.getUsername())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username is already taken!");
-        }
 
         if (usuarioRepository.existsByEmail(signUp.getEmail())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email is already in use!");
         }
 
         Usuario users = Usuario.builder()
-                .username(signUp.getUsername())
                 .password(passwordEncoder.encode(signUp.getPassword()))
                 .email(signUp.getEmail())
-                .firstName(signUp.getFirstName())
-                .lastName(signUp.getLastName())
-                .birtdate(signUp.getBirthdate()).build();
+                .build();
 
         return usuarioRepository.save(users);
     }
@@ -89,9 +83,8 @@ public class UsuarioService implements UserDetailsService {
 
         if (!usuarioRepository.existsByUsername(this.adminUsername)) {
             Usuario admin = Usuario.builder()
-                    .username(this.adminUsername)
                     .password(passwordEncoder.encode(this.adminPassword))
-                    .firstName("Admin").build();
+                    .build();
 
             admin.getRoles().add(Roles.ROLE_ADMIN);
 
