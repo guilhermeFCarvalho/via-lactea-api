@@ -22,7 +22,7 @@ public class AuthController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping("/signin")
+    @PostMapping(value = "/signin", consumes = {"application/json"})
     public ResponseEntity<Jwt> signIn(@Valid @RequestBody SignIn signIn) {
         return ResponseEntity.ok(usuarioService.signIn(signIn));
     }

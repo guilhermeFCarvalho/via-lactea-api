@@ -8,7 +8,7 @@ import lombok.Data;
 public class SignIn {
 
     @NotEmpty
-    private String username;
+    private String email;
 
     @NotEmpty
     private String password;

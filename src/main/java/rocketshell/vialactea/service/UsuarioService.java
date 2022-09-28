@@ -54,7 +54,7 @@ public class UsuarioService implements UserDetailsService {
     public Jwt signIn(SignIn signIn) {
 
         Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(signIn.getUsername(), signIn.getPassword()));
+                .authenticate(new UsernamePasswordAuthenticationToken(signIn.getEmail(), signIn.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
