@@ -19,6 +19,10 @@
           <column name="observacoes" type="varchar(150)"></column>
           <column name="pago" type="boolean"></column>
        </createTable>
+       <addAutoIncrement
+          columnDataType="numeric(10,0)"
+          columnName="id"
+          tableName="recibodevenda"/>
     </changeSet>
 	
 </databaseChangeLog>

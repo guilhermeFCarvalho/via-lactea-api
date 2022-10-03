@@ -1,6 +1,7 @@
 package rocketshell.vialactea.domain;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,5 +16,7 @@ public class Fazenda extends BaseEntity {
   
   private String nomeDaFazenda;
   private String telefone;
-  private String car;
+  
+  @OneToOne(cascade = CascadeType.ALL)
+  private Endereco endereco;
 }

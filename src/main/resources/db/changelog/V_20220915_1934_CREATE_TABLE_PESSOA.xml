@@ -4,19 +4,37 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
         
-    <changeSet id="20220915-1935-17272" author="guilherme.carvalho">
+    <changeSet id="20220929-2022-17405" author="guilherme.carvalho">
       <preConditions  onFail="MARK_RAN">
         <not>
           <tableExists tableName="pessoa"/>
         </not>
       </preConditions>
       <createTable tableName="pessoa">
-        <column name="id" type="numeric(10,0)">
-          <constraints nullable="false" primaryKey="true" primaryKeyName="pk_pessoa"/>
-        </column>
-        <column name="telefone" type="varchar(11)">
+        <column name="dtype" type="varchar(30)">
           <constraints nullable="false"/>
         </column>
+        <column name="id" type="numeric(10,0)">
+          <constraints nullable="false" unique="true" primaryKey="true" primaryKeyName="pk_pessoa"/>
+        </column>
+        <column name="telefone" type="varchar(11)">
+        </column>
+        <column name="cnpj" type="varchar(14)">
+        </column>
+        <column name="razao_social" type="varchar(100)">
+        </column>
+        <column name="inscricao_estadual" type="varchar(12)">
+        </column>
+        <column name="nome" type="varchar(100)">
+        </column>
+        <column name="sobrenome" type="varchar(100)">
+        </column>
+        <column name="cpf" type="varchar(11)">
+        </column>
       </createTable>
+      <addAutoIncrement
+          columnDataType="numeric(10,0)"
+          columnName="id"
+          tableName="pessoa"/>
     </changeSet>
 </databaseChangeLog>

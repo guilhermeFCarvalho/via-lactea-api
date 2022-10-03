@@ -14,15 +14,24 @@
       <column name="id" type="numeric(10,0)">
         <constraints nullable="false" primaryKey="true" primaryKeyName="pk_fazenda"/>
       </column>
-      <column name="endereco_id" type="number(10,0)"> </column>
-      <column name="nomeDaFazenda" type="varchar(100)"></column>
-      <column name="telefone" type="varchar(100)"></column>
-      <column name="car" type="varchar(100)"></column>
+      <column name="nome_da_fazenda" type="varchar(100)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="telefone" type="varchar(100)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="endereco_id" type="numeric(10,0)">
+        <constraints nullable="false"/>
+      </column>
     </createTable>
     <addForeignKeyConstraint  baseColumnNames="endereco_id"
       baseTableName="fazenda"
-      constraintName="fk_endereco"
+      constraintName="fk_fazenda_2_endereco"
       referencedColumnNames="id"
       referencedTableName="endereco"/>  
+      <addAutoIncrement
+          columnDataType="numeric(10,0)"
+          columnName="id"
+          tableName="fazenda"/>
   </changeSet>	
 </databaseChangeLog>
