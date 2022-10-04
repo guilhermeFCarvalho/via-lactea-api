@@ -23,4 +23,5 @@ public class Propriedade extends BaseEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private Fazenda fazenda;
 
+    
 }
