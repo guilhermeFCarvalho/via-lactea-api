@@ -2,6 +2,8 @@ package rocketshell.vialactea.base;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +17,7 @@ public class BaseController<
   @Autowired
   private SERVICE service;
 
-  @GetMapping
+  @GetMapping("/list")
   public List<ENTITY> getAll() {
       return service.getAll();
   }
@@ -24,6 +26,12 @@ public class BaseController<
   public ENTITY getById(@PathVariable("id") Long id) {
       return service.getById(id);
   }
+
+  @GetMapping
+  public Page<ENTITY> getAllPageable(Pageable pageable) {
+      return service.getAllPageable(pageable);
+  }
+
 
   @PostMapping
   public ENTITY create(@RequestBody ENTITY newEntity) {
