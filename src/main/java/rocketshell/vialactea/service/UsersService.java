@@ -18,14 +18,15 @@ import org.springframework.web.server.ResponseStatusException;
 
 import rocketshell.vialactea.config.auth.Roles;
 import rocketshell.vialactea.config.auth.jwt.Jwt;
-import rocketshell.vialactea.domain.Usuario;
-import rocketshell.vialactea.dto.SignIn;
-import rocketshell.vialactea.dto.SignUp;
 import rocketshell.vialactea.config.auth.jwt.JwtTool;
-import rocketshell.vialactea.repository.UsuarioRepository;
+import rocketshell.vialactea.domain.Users;
+import rocketshell.vialactea.dto.sign.SignIn;
+import rocketshell.vialactea.dto.sign.SignUp;
+import rocketshell.vialactea.repository.UsersRepository;
+
 
 @Service
-public class UsuarioService implements UserDetailsService {
+public class UsersService implements UserDetailsService {
 
     @Lazy
     @Autowired
@@ -38,7 +39,7 @@ public class UsuarioService implements UserDetailsService {
     private JwtTool jwtTokenTool;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsersRepository usersRepository;
 
     @Value("${rocket-shell.auth.admin.username}")
     private String adminUsername;
@@ -47,8 +48,8 @@ public class UsuarioService implements UserDetailsService {
     private String adminPassword;
 
     @Override
-    public Usuario loadUserByUsername(String username) throws UsernameNotFoundException {
-        return usuarioRepository.findUsersByUsername(username);
+    public Users loadUserByUsername(String username) throws UsernameNotFoundException {
+        return usersRepository.findUsersByUsername(username);
     }
 
     public Jwt signIn(SignIn signIn) {
@@ -58,37 +59,44 @@ public class UsuarioService implements UserDetailsService {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        Usuario userDetails = (Usuario) authentication.getPrincipal();
+        Users userDetails = (Users) authentication.getPrincipal();
 
         return jwtTokenTool.generateToken(userDetails);
 
     }
 
-    public Usuario signUp(SignUp signUp) {
+    public Users signUp(SignUp signUp) {
+        if (usersRepository.existsByUsername(signUp.getUsername())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username is already taken!");
+        }
 
-        if (usuarioRepository.existsByEmail(signUp.getEmail())) {
+        if (usersRepository.existsByEmail(signUp.getEmail())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email is already in use!");
         }
 
-        Usuario users = Usuario.builder()
+        Users users = Users.builder()
+                .username(signUp.getUsername())
                 .password(passwordEncoder.encode(signUp.getPassword()))
                 .email(signUp.getEmail())
-                .build();
+                .firstName(signUp.getFirstName())
+                .lastName(signUp.getLastName())
+                .birtdate(signUp.getBirthdate()).build();
 
-        return usuarioRepository.save(users);
+        return usersRepository.save(users);
     }
 
     @PostConstruct
     public void registerAdminUser() {
 
-        if (!usuarioRepository.existsByUsername(this.adminUsername)) {
-            Usuario admin = Usuario.builder()
+        if (!usersRepository.existsByUsername(this.adminUsername)) {
+            Users admin = Users.builder()
+                    .username(this.adminUsername)
                     .password(passwordEncoder.encode(this.adminPassword))
-                    .build();
+                    .firstName("Admin").build();
 
             admin.getRoles().add(Roles.ROLE_ADMIN);
 
-            usuarioRepository.save(admin);
+            usersRepository.save(admin);
         }
 
     }

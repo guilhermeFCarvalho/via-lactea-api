@@ -9,7 +9,6 @@ import rocketshell.vialactea.repository.PessoaJuridicaRepository;
 
 @Service
 public class PessoaJuridicaService extends BaseService<PessoaJuridica, PessoaJuridicaRepository> {
-    @Autowired
-    private PessoaJuridicaRepository repository;
+    
     
 }

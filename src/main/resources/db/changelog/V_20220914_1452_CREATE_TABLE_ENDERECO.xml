@@ -18,7 +18,12 @@
           <column name="bairro" type="varchar(100)"></column>
           <column name="rua" type="varchar(100)"></column>
           <column name="cep" type="varchar(8)"></column>
+          <column name="numero" type="varchar(8)"></column>
        </createTable>
+       <addAutoIncrement
+          columnDataType="numeric(10,0)"
+          columnName="id"
+          tableName="endereco"/>
     </changeSet>
 	
 </databaseChangeLog>

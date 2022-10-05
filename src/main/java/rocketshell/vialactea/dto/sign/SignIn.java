@@ -1,4 +1,4 @@
-package rocketshell.vialactea.dto;
+package rocketshell.vialactea.dto.sign;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -8,7 +8,7 @@ import lombok.Data;
 public class SignIn {
 
     @NotEmpty
-    private String email;
+    private String username;
 
     @NotEmpty
     private String password;

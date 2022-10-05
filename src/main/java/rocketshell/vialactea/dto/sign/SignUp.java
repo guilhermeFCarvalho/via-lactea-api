@@ -1,4 +1,4 @@
-package rocketshell.vialactea.dto;
+package rocketshell.vialactea.dto.sign;
 
 import java.time.LocalDate;
 
@@ -13,8 +13,20 @@ import lombok.Data;
 @Data
 public class SignUp {
 
+    @NotEmpty
+    private String firstName;
+
+    @NotEmpty
+    private String lastName;
+
+    @NotNull
+    private LocalDate birthdate;
+
     @Email
     private String email;
+
+    @NotNull
+    private String username;
 
     @Length(min = 6, max = 20)
     private String password;

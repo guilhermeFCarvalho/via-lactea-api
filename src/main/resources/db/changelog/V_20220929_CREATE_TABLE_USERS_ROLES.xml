@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        
+    <changeSet id="20220929-2003-17405" author="guilherme.carvalho">
+       <preConditions onFail="MARK_RAN">
+            <not>
+              <tableExists tableName="users_roles"/>
+            </not>
+        </preConditions>
+       <createTable tableName="users_roles">
+            <column name="users_id" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_users_roles"/>
+            </column>
+            <column name="roles" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+       </createTable>
+       <addForeignKeyConstraint 
+           baseColumnNames="users_id"
+           baseTableName="users_roles"
+           constraintName="fk_users_roles_2_users"
+           referencedColumnNames="id"
+           referencedTableName="users"/>
+    </changeSet>
+</databaseChangeLog>

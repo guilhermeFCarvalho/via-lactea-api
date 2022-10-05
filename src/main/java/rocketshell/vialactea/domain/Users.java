@@ -38,7 +38,7 @@ import rocketshell.vialactea.config.auth.Roles;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Usuario implements UserDetails {
+public class Users implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
@@ -52,6 +52,13 @@ public class Usuario implements UserDetails {
     @ElementCollection(targetClass = Roles.class, fetch = FetchType.EAGER)
     @JsonProperty(access = Access.READ_ONLY)
     private Set<Roles> roles = new HashSet<>();
+
+    @NotEmpty
+    private String firstName;
+
+    private String lastName;
+
+    private LocalDate birtdate;
 
     @Email
     private String email;

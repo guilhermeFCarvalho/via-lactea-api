@@ -1,6 +1,8 @@
 package rocketshell.vialactea.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
@@ -18,9 +20,8 @@ public class Propriedade extends BaseEntity {
 
     private String telefone;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Fazenda fazenda;
 
-    @OneToOne
-    private Pessoa produtor;
+    
 }

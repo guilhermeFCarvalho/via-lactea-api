@@ -11,7 +11,6 @@ import rocketshell.vialactea.repository.PropriedadeRepository;
 @Service
 public class PropriedadeService extends BaseService<Propriedade, PropriedadeRepository>{
 
-    @Autowired
-    private PropriedadeRepository repository;
+    
     
 }
