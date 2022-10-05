@@ -17,9 +17,6 @@
       <column name="nome_da_fazenda" type="varchar(100)">
         <constraints nullable="false"/>
       </column>
-      <column name="telefone" type="varchar(100)">
-        <constraints nullable="false"/>
-      </column>
       <column name="endereco_id" type="numeric(10,0)">
         <constraints nullable="false"/>
       </column>
