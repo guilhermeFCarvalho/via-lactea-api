@@ -3,6 +3,8 @@ package rocketshell.vialactea.base;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -22,6 +24,10 @@ public class BaseService <
 
   public ENTITY getById(Long id){
       return repository.findById(id).get();
+  }
+
+  public Page<ENTITY> getAllPageable(Pageable page) {
+      return repository.findAll(page);
   }
 
   public ENTITY create (ENTITY newEntity) {
