@@ -14,10 +14,10 @@
           <column name="id" type="numeric(10,0)">
               <constraints nullable="false" primaryKey="true" primaryKeyName="pk_recibodevenda"/>
           </column>
-          <column name="quantidadeDeLeite" type="numeric(19,2)"></column>
-          <column name="dataDaVenda" type="timestamp"></column>
-          <column name="observacoes" type="varchar(150)"></column>
-          <column name="pago" type="boolean"></column>
+           <column name="quantidadedeleite" type="numeric(19,2)"/>
+           <column name="datadavenda" type="timestamp"/>
+           <column name="observacoes" type="varchar(150)"/>
+           <column name="pago" type="boolean"/>
        </createTable>
        <addAutoIncrement
           columnDataType="numeric(10,0)"
