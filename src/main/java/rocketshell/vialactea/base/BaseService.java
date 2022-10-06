@@ -11,7 +11,7 @@ import java.util.List;
 
 @Getter
 @Primary
-public class BaseService <
+public class BaseService<
     ENTITY extends BaseEntity,
     REPOSITORY extends JpaRepository<ENTITY, Long>>{
 
@@ -19,28 +19,28 @@ public class BaseService <
   private REPOSITORY repository;
 
   public List<ENTITY> getAll() {
-      return repository.findAll();
+    return repository.findAll();
   }
 
-  public ENTITY getById(Long id){
-      return repository.findById(id).get();
+  public ENTITY getById(Long id) {
+    return repository.findById(id).get();
   }
 
   public Page<ENTITY> getAllPageable(Pageable page) {
-      return repository.findAll(page);
+    return repository.findAll(page);
   }
 
-  public ENTITY create (ENTITY newEntity) {
+  public ENTITY create(ENTITY newEntity) {
 
-      return repository.save(newEntity);
+    return repository.save(newEntity);
   }
 
   public void deleteById(Long id) {
-      repository.deleteById(id);
+    repository.deleteById(id);
   }
 
-  public void updateEntity(ENTITY updateEntity){
-      repository.save(updateEntity);
+  public void updateEntity(ENTITY updateEntity) {
+    repository.save(updateEntity);
   }
 
 }

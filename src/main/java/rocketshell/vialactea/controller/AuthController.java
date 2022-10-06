@@ -15,22 +15,21 @@ import rocketshell.vialactea.dto.sign.SignIn;
 import rocketshell.vialactea.dto.sign.SignUp;
 import rocketshell.vialactea.service.UsersService;
 
-
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    @Autowired
-    private UsersService usersService;
+  @Autowired
+  private UsersService usersService;
 
-    @PostMapping("/signin")
-    public ResponseEntity<Jwt> signIn(@Valid @RequestBody SignIn signIn) {
-        return ResponseEntity.ok(usersService.signIn(signIn));
-    }
+  @PostMapping("/signin")
+  public ResponseEntity<Jwt> signIn(@Valid @RequestBody SignIn signIn) {
+    return ResponseEntity.ok(usersService.signIn(signIn));
+  }
 
-    @PostMapping("/signup")
-    public ResponseEntity<Users> signIn(@Valid @RequestBody SignUp signUp) {
-        return ResponseEntity.ok(usersService.signUp(signUp));
-    }
+  @PostMapping("/signup")
+  public ResponseEntity<Users> signIn(@Valid @RequestBody SignUp signUp) {
+    return ResponseEntity.ok(usersService.signUp(signUp));
+  }
 
 }

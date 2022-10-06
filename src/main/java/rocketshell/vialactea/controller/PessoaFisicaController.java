@@ -10,6 +10,6 @@ import rocketshell.vialactea.service.PessoaFisicaService;
 
 @RestController
 @RequestMapping("/pessoas-fisicas")
-public class PessoaFisicaController extends BaseController<PessoaFisica, PessoaFisicaRepository,PessoaFisicaService> {
-    
+public class PessoaFisicaController extends BaseController<PessoaFisica, PessoaFisicaRepository, PessoaFisicaService> {
+
 }

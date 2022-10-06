@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PessoaFisica extends Pessoa{
-    private String nome;
-    private String sobrenome;
-    private String CPF;
-     
-    
+public class PessoaFisica extends Pessoa {
+  
+  private String nome;
+  private String sobrenome;
+  private String CPF;
+
 }

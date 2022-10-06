@@ -12,5 +12,4 @@ import rocketshell.vialactea.service.PropriedadeService;
 @RequestMapping("/propriedades")
 public class PropriedadeController extends BaseController<Propriedade, PropriedadeRepository, PropriedadeService> {
 
-    
 }

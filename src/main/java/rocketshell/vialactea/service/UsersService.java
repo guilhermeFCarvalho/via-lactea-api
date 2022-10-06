@@ -24,81 +24,80 @@ import rocketshell.vialactea.dto.sign.SignIn;
 import rocketshell.vialactea.dto.sign.SignUp;
 import rocketshell.vialactea.repository.UsersRepository;
 
-
 @Service
 public class UsersService implements UserDetailsService {
 
-    @Lazy
-    @Autowired
-    private AuthenticationManager authenticationManager;
+  @Lazy
+  @Autowired
+  private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+  @Autowired
+  private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private JwtTool jwtTokenTool;
+  @Autowired
+  private JwtTool jwtTokenTool;
 
-    @Autowired
-    private UsersRepository usersRepository;
+  @Autowired
+  private UsersRepository usersRepository;
 
-    @Value("${rocket-shell.auth.admin.username}")
-    private String adminUsername;
+  @Value("${rocket-shell.auth.admin.username}")
+  private String adminUsername;
 
-    @Value("${rocket-shell.auth.admin.password}")
-    private String adminPassword;
+  @Value("${rocket-shell.auth.admin.password}")
+  private String adminPassword;
 
-    @Override
-    public Users loadUserByUsername(String username) throws UsernameNotFoundException {
-        return usersRepository.findUsersByUsername(username);
+  @Override
+  public Users loadUserByUsername(String username) throws UsernameNotFoundException {
+    return usersRepository.findUsersByUsername(username);
+  }
+
+  public Jwt signIn(SignIn signIn) {
+
+    Authentication authentication = authenticationManager
+        .authenticate(new UsernamePasswordAuthenticationToken(signIn.getUsername(), signIn.getPassword()));
+
+    SecurityContextHolder.getContext().setAuthentication(authentication);
+
+    Users userDetails = (Users) authentication.getPrincipal();
+
+    return jwtTokenTool.generateToken(userDetails);
+
+  }
+
+  public Users signUp(SignUp signUp) {
+    if (usersRepository.existsByUsername(signUp.getUsername())) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username is already taken!");
     }
 
-    public Jwt signIn(SignIn signIn) {
-
-        Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(signIn.getUsername(), signIn.getPassword()));
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        Users userDetails = (Users) authentication.getPrincipal();
-
-        return jwtTokenTool.generateToken(userDetails);
-
+    if (usersRepository.existsByEmail(signUp.getEmail())) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email is already in use!");
     }
 
-    public Users signUp(SignUp signUp) {
-        if (usersRepository.existsByUsername(signUp.getUsername())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username is already taken!");
-        }
+    Users users = Users.builder()
+        .username(signUp.getUsername())
+        .password(passwordEncoder.encode(signUp.getPassword()))
+        .email(signUp.getEmail())
+        .firstName(signUp.getFirstName())
+        .lastName(signUp.getLastName())
+        .birtdate(signUp.getBirthdate()).build();
 
-        if (usersRepository.existsByEmail(signUp.getEmail())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email is already in use!");
-        }
+    return usersRepository.save(users);
+  }
 
-        Users users = Users.builder()
-                .username(signUp.getUsername())
-                .password(passwordEncoder.encode(signUp.getPassword()))
-                .email(signUp.getEmail())
-                .firstName(signUp.getFirstName())
-                .lastName(signUp.getLastName())
-                .birtdate(signUp.getBirthdate()).build();
+  @PostConstruct
+  public void registerAdminUser() {
 
-        return usersRepository.save(users);
+    if (!usersRepository.existsByUsername(this.adminUsername)) {
+      Users admin = Users.builder()
+          .username(this.adminUsername)
+          .password(passwordEncoder.encode(this.adminPassword))
+          .firstName("Admin").build();
+
+      admin.getRoles().add(Roles.ROLE_ADMIN);
+
+      usersRepository.save(admin);
     }
 
-    @PostConstruct
-    public void registerAdminUser() {
-
-        if (!usersRepository.existsByUsername(this.adminUsername)) {
-            Users admin = Users.builder()
-                    .username(this.adminUsername)
-                    .password(passwordEncoder.encode(this.adminPassword))
-                    .firstName("Admin").build();
-
-            admin.getRoles().add(Roles.ROLE_ADMIN);
-
-            usersRepository.save(admin);
-        }
-
-    }
+  }
 
 }
