@@ -3,6 +3,8 @@ package rocketshell.vialactea.domain;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,8 +21,6 @@ public class Animal extends BaseEntity{
    private Animal parentesco;
    private String especie;
    private Float peso;
-   //TO-DO ConsultaVeterinario
-   //private ConsultaVeterinario ultimaVisitaVeterinario;
    private String raca;
    private int quantidadeDeCrias;
    private Date dataDeNascimento;
@@ -28,6 +28,8 @@ public class Animal extends BaseEntity{
    private String tipoAlimentação;
    private String identificacao;
    private Animal animalQueCruzou;
+   @Enumerated(EnumType.STRING)
+   private Sexo sexo;
    
    
 }
