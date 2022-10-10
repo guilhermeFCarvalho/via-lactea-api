@@ -42,7 +42,7 @@ public class BaseController<
   }
 
   @PutMapping("/{id}")
-  public void update(@RequestBody ENTITY entidade) {
+  public void update(@PathVariable("id") @RequestBody ENTITY entidade) {
     service.updateEntity(entidade);
   }
 
