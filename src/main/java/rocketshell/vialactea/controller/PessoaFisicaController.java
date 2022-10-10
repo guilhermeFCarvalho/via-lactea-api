@@ -9,7 +9,7 @@ import rocketshell.vialactea.repository.PessoaFisicaRepository;
 import rocketshell.vialactea.service.PessoaFisicaService;
 
 @RestController
-@RequestMapping("/pessoas-fisicas")
+@RequestMapping("api//pessoas-fisicas")
 public class PessoaFisicaController extends BaseController<PessoaFisica, PessoaFisicaRepository, PessoaFisicaService> {
 
 }
