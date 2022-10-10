@@ -23,43 +23,44 @@ import rocketshell.vialactea.service.UsersService;
 
 public class AuthenticationFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private UsersService usersService;
+  @Autowired
+  private UsersService usersService;
 
-    @Autowired
-    private JwtTool tokenTool;
+  @Autowired
+  private JwtTool tokenTool;
 
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
+  @Override
+  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+      throws ServletException, IOException {
 
-        Optional.ofNullable(request.getHeader("Authorization")).ifPresent(authorization -> {
-            String bearer = "Bearer ";
+    Optional.ofNullable(request.getHeader("Authorization")).ifPresent(authorization -> {
+      String bearer = "Bearer ";
 
-            if (!authorization.startsWith(bearer)) {
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Expected Bearer prefix to authorization header value!");
-            }
+      if (!authorization.startsWith(bearer)) {
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
+            "Expected Bearer prefix to authorization header value!");
+      }
 
-            Jwt jwtToken = new Jwt(authorization.replace(bearer, ""));
+      Jwt jwtToken = new Jwt(authorization.replace(bearer, ""));
 
-            if (tokenTool.validateJwtToken(jwtToken.getToken())) {
-                String username = tokenTool.getUsernameFromToken(jwtToken);
+      if (tokenTool.validateJwtToken(jwtToken.getToken())) {
+        String username = tokenTool.getUsernameFromToken(jwtToken);
 
-                UserDetails userDetails = usersService.loadUserByUsername(username);
+        UserDetails userDetails = usersService.loadUserByUsername(username);
 
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
-                        null,
-                        userDetails.getAuthorities());
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
+            null,
+            userDetails.getAuthorities());
 
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-            } else {
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Bearer token is invalid!");
-            }
-        });
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+      } else {
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Bearer token is invalid!");
+      }
+    });
 
-        filterChain.doFilter(request, response);
-    }
+    filterChain.doFilter(request, response);
+  }
 
 }

@@ -11,13 +11,12 @@ import rocketshell.vialactea.base.BaseEntity;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Endereco extends BaseEntity{
+public class Endereco extends BaseEntity {
 
-	private String rua;
-	private String numero;
-	private String bairro;
-	private String cidade;
-	private String cep;
-	
-	
+  private String rua;
+  private String numero;
+  private String bairro;
+  private String cidade;
+  private String cep;
+
 }

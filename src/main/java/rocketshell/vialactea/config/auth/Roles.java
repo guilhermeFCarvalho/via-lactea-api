@@ -10,30 +10,30 @@ import org.springframework.security.core.GrantedAuthority;
 
 public enum Roles implements GrantedAuthority {
 
-    ROLE_READ_ONLY,
-    ROLE_INTERNAL(ROLE_READ_ONLY),
-    ROLE_TEST(ROLE_INTERNAL),
-    ROLE_ADMIN(ROLE_READ_ONLY, ROLE_INTERNAL, ROLE_TEST);
+  ROLE_READ_ONLY,
+  ROLE_INTERNAL(ROLE_READ_ONLY),
+  ROLE_TEST(ROLE_INTERNAL),
+  ROLE_ADMIN(ROLE_READ_ONLY, ROLE_INTERNAL, ROLE_TEST);
 
-    private Roles(Roles... roles) {
-        this.compositeRoles = new HashSet<>(Arrays.asList(roles));
-    }
+  private Roles(Roles... roles) {
+    this.compositeRoles = new HashSet<>(Arrays.asList(roles));
+  }
 
-    private Set<Roles> compositeRoles = new HashSet<>();
+  private Set<Roles> compositeRoles = new HashSet<>();
 
-    @Override
-    public String getAuthority() {
-        return name();
-    }
+  @Override
+  public String getAuthority() {
+    return name();
+  }
 
-    public Set<Roles> getCompositeRoles() {
-        return this.compositeRoles.stream().flatMap(Roles::flatten).collect(Collectors.toSet());
-    }
+  public Set<Roles> getCompositeRoles() {
+    return this.compositeRoles.stream().flatMap(Roles::flatten).collect(Collectors.toSet());
+  }
 
-    private static Stream<Roles> flatten(Roles role) {
-        return Stream.concat(
-                Stream.of(role),
-                role.getCompositeRoles().stream().flatMap(Roles::flatten));
-    }
+  private static Stream<Roles> flatten(Roles role) {
+    return Stream.concat(
+        Stream.of(role),
+        role.getCompositeRoles().stream().flatMap(Roles::flatten));
+  }
 
 }

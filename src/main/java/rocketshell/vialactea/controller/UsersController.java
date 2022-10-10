@@ -8,14 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import rocketshell.vialactea.domain.Users;
 
-
 @RestController
 @RequestMapping("/api/users")
 public class UsersController {
 
-    @GetMapping("/me")
-    public ResponseEntity<Users> getMe(@AuthenticationPrincipal Users user) {
-        return ResponseEntity.ok(user);
-    }
+  @GetMapping("/me")
+  public ResponseEntity<Users> getMe(@AuthenticationPrincipal Users user) {
+    return ResponseEntity.ok(user);
+  }
 
 }

@@ -40,67 +40,67 @@ import rocketshell.vialactea.config.auth.Roles;
 @AllArgsConstructor
 public class Users implements UserDetails {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-    private UUID id;
+  @Id
+  @GeneratedValue(generator = "uuid2")
+  @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+  private UUID id;
 
-    @Builder.Default
-    @Enumerated(EnumType.STRING)
-    @ElementCollection(targetClass = Roles.class, fetch = FetchType.EAGER)
-    @JsonProperty(access = Access.READ_ONLY)
-    private Set<Roles> roles = new HashSet<>();
+  @Builder.Default
+  @Enumerated(EnumType.STRING)
+  @ElementCollection(targetClass = Roles.class, fetch = FetchType.EAGER)
+  @JsonProperty(access = Access.READ_ONLY)
+  private Set<Roles> roles = new HashSet<>();
 
-    @NotEmpty
-    private String firstName;
+  @NotEmpty
+  private String firstName;
 
-    private String lastName;
+  private String lastName;
 
-    private LocalDate birtdate;
+  private LocalDate birtdate;
 
-    @Email
-    private String email;
+  @Email
+  private String email;
 
-    @NotEmpty
-    @Column(unique = true, updatable = false)
-    private String username;
+  @NotEmpty
+  @Column(unique = true, updatable = false)
+  private String username;
 
-    @NotEmpty
-    @JsonProperty(access = Access.WRITE_ONLY)
-    private String password;
+  @NotEmpty
+  @JsonProperty(access = Access.WRITE_ONLY)
+  private String password;
 
-    @Override
-    @JsonIgnore
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Stream.concat(roles.stream(), roles.stream()
-                .map(Roles::getCompositeRoles).flatMap(Set::stream))
-                .collect(Collectors.toSet());
-    }
+  @Override
+  @JsonIgnore
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return Stream.concat(roles.stream(), roles.stream()
+        .map(Roles::getCompositeRoles).flatMap(Set::stream))
+        .collect(Collectors.toSet());
+  }
 
-    @Override
-    @JsonIgnore
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+  @Override
+  @JsonIgnore
+  public boolean isAccountNonExpired() {
+    return true;
+  }
 
-    @Override
-    @JsonIgnore
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+  @Override
+  @JsonIgnore
+  public boolean isAccountNonLocked() {
+    return true;
+  }
 
-    @Override
-    @JsonIgnore
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+  @Override
+  @JsonIgnore
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
 
-    @Override
-    @JsonIgnore
-    public boolean isEnabled() {
-        return true;
-    }
+  @Override
+  @JsonIgnore
+  public boolean isEnabled() {
+    return true;
+  }
 
 }

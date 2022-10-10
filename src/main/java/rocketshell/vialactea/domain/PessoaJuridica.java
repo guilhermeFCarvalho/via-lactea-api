@@ -12,11 +12,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PessoaJuridica extends Pessoa {
-    private String razaoSocial;
-    private String telefone;
-    private String CNPJ;
-    private String inscricaoEstadual;
 
+  private String razaoSocial;
+  private String telefone;
+  private String CNPJ;
+  private String inscricaoEstadual;
 
-    
 }

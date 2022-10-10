@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 public class SignIn {
 
-    @NotEmpty
-    private String email;
+  @NotEmpty
+  private String email;
 
-    @NotEmpty
-    private String password;
+  @NotEmpty
+  private String password;
 
 }

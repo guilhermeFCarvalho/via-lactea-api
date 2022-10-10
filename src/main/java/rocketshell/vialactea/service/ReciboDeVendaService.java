@@ -7,6 +7,6 @@ import rocketshell.vialactea.domain.ReciboDeVenda;
 import rocketshell.vialactea.repository.ReciboDeVendaRepository;
 
 @Service
-public class ReciboDeVendaService extends BaseService<ReciboDeVenda, ReciboDeVendaRepository>{
-  
+public class ReciboDeVendaService extends BaseService<ReciboDeVenda, ReciboDeVendaRepository> {
+
 }
