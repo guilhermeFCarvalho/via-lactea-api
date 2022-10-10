@@ -2,6 +2,7 @@ package rocketshell.vialactea.domain;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +24,7 @@ public class ReciboDeVenda extends BaseEntity {
   private BigDecimal quantidadeLeiteVendida;
 
   @Column(name = "datadavenda")
-  private Date dataDaVenda;
+  private LocalDate dataDaVenda = LocalDate.now();
 
   @Column(name = "observacoes")
   private String observacoes;
