@@ -16,8 +16,7 @@ import rocketshell.vialactea.base.BaseEntity;
 public class Fazenda extends BaseEntity {
 
   private String nomeDaFazenda;
-  private String telefone;
-
+  
   @OneToOne(cascade = CascadeType.ALL)
   private Endereco endereco;
 }
