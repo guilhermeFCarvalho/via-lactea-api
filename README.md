@@ -1,11 +1,10 @@
-
 ## Sobre as extensões : 
 Para rodar esse projeto no VScode é  necessário utilizar o Lombok e Spring boot. 
 então é necessário instalar a extensões : 
 - "Lombok Annotations Support for VS Code"
 - "Spring Boot Extension Pack"
 - "Extension Pack for Java"
-- 
+
 ## Rodando o projeto.
 ### VS code. 
 
