@@ -1,5 +1,6 @@
 package rocketshell.vialactea.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -11,10 +12,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PessoaFisica extends Pessoa{
-    private String nome;
-    private String sobrenome;
-    private String CPF;
-     
-    
+public class PessoaFisica extends Pessoa {
+  
+  private String nome;
+  private String sobrenome;
+
+  @Column(name = "cpf")
+  private String CPF;
+
 }

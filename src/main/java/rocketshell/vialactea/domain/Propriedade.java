@@ -16,12 +16,10 @@ import rocketshell.vialactea.base.BaseEntity;
 @NoArgsConstructor
 public class Propriedade extends BaseEntity {
 
-    private String car;
+  private String car;
+  private String telefone;
 
-    private String telefone;
+  @OneToOne(cascade = CascadeType.ALL)
+  private Fazenda fazenda;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Fazenda fazenda;
-
-    
 }

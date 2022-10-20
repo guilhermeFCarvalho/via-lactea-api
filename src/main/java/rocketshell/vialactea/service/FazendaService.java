@@ -7,6 +7,6 @@ import rocketshell.vialactea.domain.Fazenda;
 import rocketshell.vialactea.repository.FazendaRepository;
 
 @Service
-public class FazendaService extends BaseService<Fazenda,FazendaRepository> {
-  
+public class FazendaService extends BaseService<Fazenda, FazendaRepository> {
+
 }

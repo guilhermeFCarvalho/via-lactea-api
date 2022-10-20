@@ -11,7 +11,7 @@ import rocketshell.vialactea.service.FazendaService;
 
 @Controller
 @RestController
-@RequestMapping("/fazendas")
-public class FazendaController extends BaseController<Fazenda,FazendaRepository,FazendaService> {
-  
+@RequestMapping("/api/fazendas")
+public class FazendaController extends BaseController<Fazenda, FazendaRepository, FazendaService> {
+
 }

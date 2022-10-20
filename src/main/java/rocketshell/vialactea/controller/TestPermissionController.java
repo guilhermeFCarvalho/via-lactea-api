@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/test")
 public class TestPermissionController {
 
-    @GetMapping("/any-user")
-    public ResponseEntity<String> testPermissionAnyUser() {
-        return ResponseEntity.ok("OK");
-    }
+  @GetMapping("/any-user")
+  public ResponseEntity<String> testPermissionAnyUser() {
+    return ResponseEntity.ok("OK");
+  }
 
-    @GetMapping("/only-internal")
-    @PreAuthorize("hasRole('INTERNAL')")
-    public ResponseEntity<String> testPermissionOnlyInternalRole() {
-        return ResponseEntity.ok("OK");
-    }
+  @GetMapping("/only-internal")
+  @PreAuthorize("hasRole('INTERNAL')")
+  public ResponseEntity<String> testPermissionOnlyInternalRole() {
+    return ResponseEntity.ok("OK");
+  }
 
-    @GetMapping("/only-admin")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<String> testPermissionOnlyAdminRole() {
-        return ResponseEntity.ok("OK");
-    }
+  @GetMapping("/only-admin")
+  @PreAuthorize("hasRole('ADMIN')")
+  public ResponseEntity<String> testPermissionOnlyAdminRole() {
+    return ResponseEntity.ok("OK");
+  }
 
 }
