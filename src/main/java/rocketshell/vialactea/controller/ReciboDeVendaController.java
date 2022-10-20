@@ -11,6 +11,6 @@ import rocketshell.vialactea.service.ReciboDeVendaService;
 
 @Controller
 @RestController
-@RequestMapping("/recibo-de-venda")
+@RequestMapping("/api/recibo-de-venda")
 public class ReciboDeVendaController extends BaseController<ReciboDeVenda, ReciboDeVendaRepository, ReciboDeVendaService>{
 }
