@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        
+    <changeSet id="20221019-2137-17412" author="rodrigo.bueno">
+       <preConditions  onFail="MARK_RAN">
+            <not>
+              <tableExists tableName="animal"/>
+            </not>
+        </preConditions>
+       <createTable tableName="animal">
+          <column name="id" type="numeric(10,0)">
+              <constraints nullable="false" primaryKey="true" primaryKeyName="pk_animal"/>
+          </column>
+          <column name="parentesco" type="numeric(10,0)"></column>
+          <column name="especie" type="varchar(150)"></column>
+          <column name="peso" type="numeric(10,0)"></column>
+          <column name="raca" type="varchar(150)"></column>
+          <column name="quantidade_de_crias" type="numeric(10,0)"></column>
+          <column name="data_de_nascimento" type="timestamp"></column>
+          <column name="data_ultima_gestacao" type="timestamp"></column>
+          <column name="tipo_alimentacao" type="varchar(150)"></column>
+          <column name="identificacao" type="varchar(150)"></column>
+          <column name="animal_que_cruzou" type="numeric(10,0)"></column>
+          <column name="sexo" type="varchar(100)"></column>
+          
+       </createTable>
+       		<addForeignKeyConstraint  
+       		  baseColumnNames="parentesco"
+		      baseTableName="animal"
+		      constraintName="fk_parentesco"
+		      referencedColumnNames="id"
+		      referencedTableName="animal"
+		    />  
+		    <addForeignKeyConstraint  
+       		  baseColumnNames="animal_que_cruzou"
+		      baseTableName="animal"
+		      constraintName="fk_animal_que_cruzou"
+		      referencedColumnNames="id"
+		      referencedTableName="animal"
+		    />  
+	      
+    </changeSet>
+	
+</databaseChangeLog>
