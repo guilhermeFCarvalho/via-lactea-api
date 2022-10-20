@@ -14,7 +14,7 @@
           <column name="id" type="numeric(10,0)">
               <constraints nullable="false" primaryKey="true" primaryKeyName="pk_animal"/>
           </column>
-          <column name="parentesco" type="numeric(10,0)"></column>
+          <column name="parentesco_animal_id" type="numeric(10,0)"></column>
           <column name="especie" type="varchar(150)"></column>
           <column name="peso" type="numeric(10,0)"></column>
           <column name="raca" type="varchar(150)"></column>
@@ -23,19 +23,19 @@
           <column name="data_ultima_gestacao" type="timestamp"></column>
           <column name="tipo_alimentacao" type="varchar(150)"></column>
           <column name="identificacao" type="varchar(150)"></column>
-          <column name="animal_que_cruzou" type="numeric(10,0)"></column>
+          <column name="animal_que_cruzou_id" type="numeric(10,0)"></column>
           <column name="sexo" type="varchar(100)"></column>
           
        </createTable>
        		<addForeignKeyConstraint  
-       		  baseColumnNames="parentesco"
+       		  baseColumnNames="parentesco_animal_id"
 		      baseTableName="animal"
 		      constraintName="fk_parentesco"
 		      referencedColumnNames="id"
 		      referencedTableName="animal"
 		    />  
 		    <addForeignKeyConstraint  
-       		  baseColumnNames="animal_que_cruzou"
+       		  baseColumnNames="animal_que_cruzou_id"
 		      baseTableName="animal"
 		      constraintName="fk_animal_que_cruzou"
 		      referencedColumnNames="id"

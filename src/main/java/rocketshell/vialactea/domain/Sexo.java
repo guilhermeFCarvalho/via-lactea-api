@@ -1,6 +1,6 @@
 package rocketshell.vialactea.domain;
 
 public enum Sexo {
-    FÊMEA,
+    FEMEA,
     MACHO
 }
