@@ -11,7 +11,7 @@ import rocketshell.vialactea.service.AnimalService;
 
 @Controller
 @RestController
-@RequestMapping("/animais")
+@RequestMapping("/api/animais")
 public class AnimalController extends BaseController<Animal,AnimalRepository,AnimalService>{
      
 }
