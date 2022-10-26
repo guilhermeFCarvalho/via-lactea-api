@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import rocketshell.vialactea.config.auth.jwt.Jwt;
-import rocketshell.vialactea.domain.Users;
+import rocketshell.vialactea.domain.Usuario;
 import rocketshell.vialactea.dto.sign.SignIn;
 import rocketshell.vialactea.dto.sign.SignUp;
 import rocketshell.vialactea.service.UsersService;
@@ -28,7 +28,7 @@ public class AuthController {
   }
 
   @PostMapping("/signup")
-  public ResponseEntity<Users> signIn(@Valid @RequestBody SignUp signUp) {
+  public ResponseEntity<Usuario> signIn(@Valid @RequestBody SignUp signUp) {
     return ResponseEntity.ok(usersService.signUp(signUp));
   }
 

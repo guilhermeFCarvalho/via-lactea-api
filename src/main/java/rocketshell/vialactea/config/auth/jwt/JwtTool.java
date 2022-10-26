@@ -17,6 +17,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.extern.log4j.Log4j2;
+import rocketshell.vialactea.domain.Usuario;
 
 @Log4j2
 @Component
@@ -28,12 +29,12 @@ public class JwtTool {
   @Value("${rocket-shell.auth.jwt.expiration-ms}")
   private int expirationMs;
 
-  public Jwt generateToken(UserDetails userDetails) {
+  public Jwt generateToken(Usuario usuario) {
     Map<String, Object> claims = new HashMap<>();
 
     String token = Jwts.builder()
         .setClaims(claims)
-        .setSubject(userDetails.getUsername())
+        .setSubject(usuario.getEmail())
         .setIssuedAt(new Date())
         .setExpiration(new Date((new Date()).getTime() + expirationMs))
         .signWith(SignatureAlgorithm.HS512, secret).compact();

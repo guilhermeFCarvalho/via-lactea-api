@@ -7,22 +7,22 @@
     <changeSet id="20220929-2003-17405" author="guilherme.carvalho">
        <preConditions onFail="MARK_RAN">
             <not>
-              <tableExists tableName="users_roles"/>
+              <tableExists tableName="usuario_roles"/>
             </not>
         </preConditions>
-       <createTable tableName="users_roles">
-            <column name="users_id" type="uuid">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_users_roles"/>
+       <createTable tableName="usuario_roles">
+            <column name="usuario_id" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_usuario_roles"/>
             </column>
             <column name="roles" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
        </createTable>
        <addForeignKeyConstraint 
-           baseColumnNames="users_id"
-           baseTableName="users_roles"
-           constraintName="fk_users_roles_2_users"
+           baseColumnNames="usuario_id"
+           baseTableName="usuario_roles"
+           constraintName="fk_usuario_roles_2_usuario"
            referencedColumnNames="id"
-           referencedTableName="users"/>
+           referencedTableName="usuario"/>
     </changeSet>
 </databaseChangeLog>

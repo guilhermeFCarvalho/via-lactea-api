@@ -4,14 +4,13 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import rocketshell.vialactea.domain.Users;
+import rocketshell.vialactea.domain.Usuario;
 
-public interface UsersRepository extends JpaRepository<Users, UUID> {
+public interface UsersRepository extends JpaRepository<Usuario, UUID> {
 
-  boolean existsByUsername(String username);
 
   boolean existsByEmail(String email);
 
-  Users findUsersByUsername(String username);
+  Usuario findUsuarioByEmail(String email);
 
 }
