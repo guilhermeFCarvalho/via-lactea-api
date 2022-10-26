@@ -18,7 +18,11 @@
           <column name="data_da_consulta" type="timestamp"></column>
           <column name="animal_id" type="numeric(10,0)"></column>
        </createTable>
-       
+             <addAutoIncrement
+	          columnDataType="numeric(10,0)"
+	          columnName="id"
+	          tableName="consulta_veterinario"
+	         />
        		<addForeignKeyConstraint  
        		  baseColumnNames="animal_id"
 		      baseTableName="consulta_veterinario"
