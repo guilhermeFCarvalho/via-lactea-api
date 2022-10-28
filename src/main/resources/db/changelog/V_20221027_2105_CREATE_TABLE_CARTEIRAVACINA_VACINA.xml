@@ -14,20 +14,32 @@
           <column name="id" type="numeric(10,0)">
               <constraints nullable="false" primaryKey="true" primaryKeyName="pk_carteira_vacina_vacina"/>
           </column>
-          <column name="lote" type="varchar(150)"></column>
-          <column name="data" type="timestamp"></column>
-          <column name="fabricante" type="varchar(150)"></column>
-          <column name="animal_id" type="numeric(10,0)"></column>
-          <column name="vacinas" type=""></column>
+          <column name="carteira_vacina_id" type="numeric(10,0)"></column>
+          <column name="vacina_id" type="numeric(10,0)"></column>
           
        </createTable>
+            
+             <addAutoIncrement 
+           	   columnDataType="numeric(10,0)"
+           	   columnName="id"
+           	   tableName="carteira_vacina_vacina"
+           	 />
+           
        		<addForeignKeyConstraint  
-       		  baseColumnNames="animal_id"
-		      baseTableName="carteira_vacina"
-		      constraintName="fk_animal_carteira_vacina"
+       		  baseColumnNames="carteira_vacina_id"
+		      baseTableName="carteira_vacina_vacina"
+		      constraintName="fk_carteira_vacina_id"
 		      referencedColumnNames="id"
-		      referencedTableName="animal"
+		      referencedTableName="carteira_vacina"
 		    />  
+		    <addForeignKeyConstraint  
+       		  baseColumnNames="vacina_id"
+		      baseTableName="carteira_vacina_vacina"
+		      constraintName="fk_vacina_id"
+		      referencedColumnNames="id"
+		      referencedTableName="vacina"
+		    />  
+		    
 	      
     </changeSet>
 	

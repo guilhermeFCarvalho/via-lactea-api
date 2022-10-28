@@ -18,9 +18,14 @@
           <column name="data" type="timestamp"></column>
           <column name="fabricante" type="varchar(150)"></column>
           <column name="animal_id" type="numeric(10,0)"></column>
-          <column name="vacinas" type=""></column>
           
        </createTable>
+            <addAutoIncrement 
+           	   columnDataType="numeric(10,0)"
+           	   columnName="id"
+           	   tableName="carteira_vacina"
+           	 />
+           	 
        		<addForeignKeyConstraint  
        		  baseColumnNames="animal_id"
 		      baseTableName="carteira_vacina"
