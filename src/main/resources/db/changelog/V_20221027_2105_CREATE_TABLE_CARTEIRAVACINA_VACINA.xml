@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        
+    <changeSet id="20221027-2106-17661" author="rodrigo.bueno">
+       <preConditions  onFail="MARK_RAN">
+            <not>
+              <tableExists tableName="carteira_vacina_vacina"/>
+            </not>
+        </preConditions>
+       <createTable tableName="carteira_vacina_vacina">
+          <column name="id" type="numeric(10,0)">
+              <constraints nullable="false" primaryKey="true" primaryKeyName="pk_carteira_vacina_vacina"/>
+          </column>
+          <column name="lote" type="varchar(150)"></column>
+          <column name="data" type="timestamp"></column>
+          <column name="fabricante" type="varchar(150)"></column>
+          <column name="animal_id" type="numeric(10,0)"></column>
+          <column name="vacinas" type=""></column>
+          
+       </createTable>
+       		<addForeignKeyConstraint  
+       		  baseColumnNames="animal_id"
+		      baseTableName="carteira_vacina"
+		      constraintName="fk_animal_carteira_vacina"
+		      referencedColumnNames="id"
+		      referencedTableName="animal"
+		    />  
+	      
+    </changeSet>
+	
+</databaseChangeLog>
