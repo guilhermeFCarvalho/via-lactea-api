@@ -31,7 +31,15 @@
         </column>
         <column name="cpf" type="varchar(11)">
         </column>
+        <column name="usuario_id" type="uuid">
+        </column>
       </createTable>
+
+      <addForeignKeyConstraint  baseColumnNames="usuario_id"
+                                baseTableName="pessoa"
+                                constraintName="fk_usuario_2_pessoa"
+                                referencedColumnNames="id"
+                                referencedTableName="usuario"/>
       <addAutoIncrement
           columnDataType="numeric(10,0)"
           columnName="id"

@@ -17,9 +17,5 @@
             <column name="email" type="varchar(100)" />
             <column name="password" type="varchar(100)"/>
        </createTable>
-       <addAutoIncrement
-          columnDataType="numeric(10,0)"
-          columnName="id"
-          tableName="pessoa"/>
     </changeSet>
 </databaseChangeLog>
