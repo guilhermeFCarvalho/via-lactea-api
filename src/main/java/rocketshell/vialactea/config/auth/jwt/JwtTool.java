@@ -34,7 +34,7 @@ public class JwtTool {
 
     String token = Jwts.builder()
         .setClaims(claims)
-        .setSubject(usuario.getEmail())
+        .setSubject(usuario.getId().toString())
         .setIssuedAt(new Date())
         .setExpiration(new Date((new Date()).getTime() + expirationMs))
         .signWith(SignatureAlgorithm.HS512, secret).compact();
