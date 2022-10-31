@@ -19,6 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 import rocketshell.vialactea.config.auth.Roles;
 import rocketshell.vialactea.config.auth.jwt.Jwt;
 import rocketshell.vialactea.config.auth.jwt.JwtTool;
+import rocketshell.vialactea.domain.PessoaFisica;
 import rocketshell.vialactea.domain.Usuario;
 import rocketshell.vialactea.dto.sign.SignIn;
 import rocketshell.vialactea.dto.sign.SignUp;
@@ -39,6 +40,9 @@ public class UsersService implements UserDetailsService {
 
   @Autowired
   private UsersRepository usersRepository;
+
+  @Autowired
+  private PessoaFisicaService pessoaFisicaService;
 
   @Value("${rocket-shell.auth.admin.email}")
   private String adminUsername;
@@ -75,7 +79,15 @@ public class UsersService implements UserDetailsService {
         .password(passwordEncoder.encode(signUp.getPassword()))
         .build();
 
-    return usersRepository.save(users);
+    Usuario novoUsuario = usersRepository.save(users);
+
+    PessoaFisica pessoaFisicaVinculada = signUp.getPessoaFisica();
+    pessoaFisicaVinculada.setUsuario(novoUsuario);
+
+    pessoaFisicaService.create(pessoaFisicaVinculada);
+
+    return novoUsuario;
+
   }
 
   @PostConstruct

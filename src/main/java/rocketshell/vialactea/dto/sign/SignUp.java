@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 import lombok.Data;
+import rocketshell.vialactea.domain.PessoaFisica;
 
 @Data
 public class SignUp {
@@ -17,4 +18,6 @@ public class SignUp {
 
   @Length(min = 6, max = 20)
   private String password;
+
+  private PessoaFisica pessoaFisica;
 }
