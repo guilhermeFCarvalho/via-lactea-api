@@ -25,6 +25,7 @@
           <column name="identificacao" type="varchar(150)"></column>
           <column name="animal_que_cruzou_id" type="numeric(10,0)"></column>
           <column name="sexo" type="varchar(100)"></column>
+          <column name="fazenda" type="numeric(10,0)"></column>
           
        </createTable>
        		<addForeignKeyConstraint  
@@ -41,6 +42,18 @@
 		      referencedColumnNames="id"
 		      referencedTableName="animal"
 		    />  
+		    <addForeignKeyConstraint  
+       		  baseColumnNames="fazenda"
+		      baseTableName="animal"
+		      constraintName="fk_animal_fazenda"
+		      referencedColumnNames="id"
+		      referencedTableName="fazenda"
+		    />  
+		    <addAutoIncrement
+             	columnDataType="numeric(10,0)"
+             	columnName="id"
+             	tableName="animal"
+            />
 	      
     </changeSet>
 	
