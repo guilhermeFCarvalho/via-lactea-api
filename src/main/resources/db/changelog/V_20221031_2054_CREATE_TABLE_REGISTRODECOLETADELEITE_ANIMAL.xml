@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        
+    <changeSet id="20221031-2056-17737" author="rodrigo.bueno">
+       <preConditions  onFail="MARK_RAN">
+            <not>
+              <tableExists tableName="registro_coleta_de_leite_animal"/>
+            </not>
+        </preConditions>
+       <createTable tableName="registro_coleta_de_leite_animal">
+          <column name="id" type="numeric(10,0)">
+              <constraints nullable="false" primaryKey="true" primaryKeyName="pk_registro_coleta_de_leite_animal"/>
+          </column>
+          <column name="registro_coleta_de_leite_id" type="numeric(10,0)"></column>
+          <column name="animal_id" type="numeric(10,0)"></column>
+          
+       </createTable>
+          <addAutoIncrement 
+           	   columnDataType="numeric(10,0)"
+           	   columnName="id"
+           	   tableName="registro_coleta_de_leite_animal"
+          />
+          <addForeignKeyConstraint  
+       		  baseColumnNames="registro_coleta_de_leite_id"
+		      baseTableName="registro_coleta_de_leite_animal"
+		      constraintName="fk_registro_coleta_de_leite_id"
+		      referencedColumnNames="id"
+		      referencedTableName="registro_coleta_de_leite"
+		  />  
+          <addForeignKeyConstraint  
+       		  baseColumnNames="animal_id"
+		      baseTableName="registro_coleta_de_leite_animal"
+		      constraintName="fk_animal_id"
+		      referencedColumnNames="id"
+		      referencedTableName="animal"
+		  />  
+
+          
+
+	      
+    </changeSet>
+	
+</databaseChangeLog>
