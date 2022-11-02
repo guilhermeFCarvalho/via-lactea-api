@@ -32,9 +32,11 @@ public class JwtTool {
   public Jwt generateToken(Usuario usuario) {
     Map<String, Object> claims = new HashMap<>();
 
+    claims.put("userId",usuario.getId());
+
     String token = Jwts.builder()
         .setClaims(claims)
-        .setSubject(usuario.getId().toString())
+        .setSubject(usuario.getEmail())
         .setIssuedAt(new Date())
         .setExpiration(new Date((new Date()).getTime() + expirationMs))
         .signWith(SignatureAlgorithm.HS512, secret).compact();
