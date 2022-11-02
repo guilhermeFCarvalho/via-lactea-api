@@ -30,6 +30,7 @@ public class Animal extends BaseEntity{
    private String especie;
    
    @ManyToOne
+   @JoinColumn(name = "fazenda_id")
    private Fazenda fazenda;
    
    private Float peso;
