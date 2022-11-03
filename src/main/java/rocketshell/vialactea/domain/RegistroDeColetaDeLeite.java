@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -24,6 +25,10 @@ public class RegistroDeColetaDeLeite extends BaseEntity{
     
 	@Column(name = "data_da_coleta")
 	private Date dataDaColeta;
+	
+	@OneToOne
+	@JoinColumn(name = "propriedade_id")
+	private Propriedade propriedade;
 	
 	@Column(name = "quantidade_de_leite_coletado")
 	private float quantidadeDeLeiteColetado;

@@ -16,6 +16,7 @@
           </column>
           <column name="data_da_coleta" type="timestamp"></column>
           <column name="quantidade_de_leite_coletado" type="numeric(10,0)"></column>
+          <column name="propriedade_id" type="numeric(10,0)"></column>
           
        </createTable>
           <addAutoIncrement 
@@ -23,6 +24,14 @@
            	   columnName="id"
            	   tableName="registro_coleta_de_leite"
           />
+          
+          <addForeignKeyConstraint  
+       		  baseColumnNames="propriedade_id"
+		      baseTableName="registro_coleta_de_leite"
+		      constraintName="fk_propriedade_id"
+		      referencedColumnNames="id"
+		      referencedTableName="propriedade"
+		   />  
           
 
 	      
