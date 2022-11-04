@@ -6,6 +6,9 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -31,5 +34,13 @@ public class ReciboDeVenda extends BaseEntity {
 
   @Column(name = "pago")
   private Boolean pago;
+ 
+  @ManyToOne
+  @JoinColumn(name = "pessoa_id")
+  private PessoaJuridica pessoaJuridica;
+  
+  @ManyToOne
+  @JoinColumn(name = "propriedade_id")
+  private Propriedade propriedade;
 
 }

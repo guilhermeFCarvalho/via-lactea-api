@@ -18,11 +18,31 @@
            <column name="datadavenda" type="timestamp"/>
            <column name="observacoes" type="varchar(150)"/>
            <column name="pago" type="boolean"/>
+           <column name="pessoa_id" type="numeric(10,0)"/>
+           <column name="propriedade_id" type="numeric(10,0)"/>
+         
        </createTable>
        <addAutoIncrement
           columnDataType="numeric(10,0)"
           columnName="id"
-          tableName="recibodevenda"/>
+          tableName="recibodevenda"
+       />
+          
+        <addForeignKeyConstraint  
+       		  baseColumnNames="pessoa_id"
+		      baseTableName="recibodevenda"
+		      constraintName="fk_pessoa_id"
+		      referencedColumnNames="id"
+		      referencedTableName="pessoa"
+		 />  
+		<addForeignKeyConstraint  
+       		  baseColumnNames="propriedade_id"
+		      baseTableName="recibodevenda"
+		      constraintName="fk_propriedade_id"
+		      referencedColumnNames="id"
+		      referencedTableName="propriedade"
+		 />  
+		    
     </changeSet>
 	
 </databaseChangeLog>
