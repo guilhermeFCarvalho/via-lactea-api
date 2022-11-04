@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -26,7 +27,7 @@ public class RegistroDeColetaDeLeite extends BaseEntity{
 	@Column(name = "data_da_coleta")
 	private Date dataDaColeta;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "propriedade_id")
 	private Propriedade propriedade;
 	
