@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    
+     <changeSet id="20221025-2149-17656" author="rodrigo.bueno">
+       <preConditions  onFail="MARK_RAN">
+            <not>
+              <tableExists tableName="consulta_veterinario"/>
+            </not>
+        </preConditions>
+       <createTable tableName="consulta_veterinario">
+          <column name="id" type="numeric(10,0)">
+              <constraints nullable="false" primaryKey="true" primaryKeyName="pk_consulta_veterinario"/>
+          </column>
+          <column name="descricao" type="varchar(250)"></column>
+          <column name="data_da_consulta" type="timestamp"></column>
+          <column name="animal_id" type="numeric(10,0)"></column>
+       </createTable>
+             <addAutoIncrement
+	          columnDataType="numeric(10,0)"
+	          columnName="id"
+	          tableName="consulta_veterinario"
+	         />
+       		<addForeignKeyConstraint  
+       		  baseColumnNames="animal_id"
+		      baseTableName="consulta_veterinario"
+		      constraintName="fk_animal"
+		      referencedColumnNames="id"
+		      referencedTableName="animal"
+		    />  
+	      
+    </changeSet>
+	
+</databaseChangeLog>
