@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        
+    <changeSet id="20221027-2106-17661" author="rodrigo.bueno">
+       <preConditions  onFail="MARK_RAN">
+            <not>
+              <tableExists tableName="carteira_vacina_vacina"/>
+            </not>
+        </preConditions>
+       <createTable tableName="carteira_vacina_vacina">
+          <column name="id" type="numeric(10,0)">
+              <constraints nullable="false" primaryKey="true" primaryKeyName="pk_carteira_vacina_vacina"/>
+          </column>
+          <column name="carteira_vacina_id" type="numeric(10,0)"></column>
+          <column name="vacina_id" type="numeric(10,0)"></column>
+          
+       </createTable>
+            
+             <addAutoIncrement 
+           	   columnDataType="numeric(10,0)"
+           	   columnName="id"
+           	   tableName="carteira_vacina_vacina"
+           	 />
+           
+       		<addForeignKeyConstraint  
+       		  baseColumnNames="carteira_vacina_id"
+		      baseTableName="carteira_vacina_vacina"
+		      constraintName="fk_carteira_vacina_id"
+		      referencedColumnNames="id"
+		      referencedTableName="carteira_vacina"
+		    />  
+		    <addForeignKeyConstraint  
+       		  baseColumnNames="vacina_id"
+		      baseTableName="carteira_vacina_vacina"
+		      constraintName="fk_vacina_id"
+		      referencedColumnNames="id"
+		      referencedTableName="vacina"
+		    />  
+		    
+	      
+    </changeSet>
+	
+</databaseChangeLog>
