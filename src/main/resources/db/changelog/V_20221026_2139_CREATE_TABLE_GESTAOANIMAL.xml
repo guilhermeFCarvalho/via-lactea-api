@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+     <changeSet id="20221026-2143-17668" author="rodrigo.bueno">
+       <preConditions  onFail="MARK_RAN">
+            <not>
+              <tableExists tableName="gestao_animal"/>
+            </not>
+        </preConditions>
+       <createTable tableName="gestao_animal">
+          <column name="id" type="numeric(10,0)">
+              <constraints nullable="false" primaryKey="true" primaryKeyName="pk_gestao_animal"/>
+          </column>
+          <column name="quantidade_de_racao_por_dia" type="numeric(10,0)"></column>
+          <column name="animal_id" type="numeric(10,0)"></column>
+       </createTable>
+             <addAutoIncrement
+	          columnDataType="numeric(10,0)"
+	          columnName="id"
+	          tableName="gestao_animal"
+	         />
+       		<addForeignKeyConstraint  
+       		  baseColumnNames="animal_id"
+		      baseTableName="gestao_animal"
+		      constraintName="fk_gestao_animal"
+		      referencedColumnNames="id"
+		      referencedTableName="animal"
+		    />  
+	      
+    </changeSet>
+	
+</databaseChangeLog>
