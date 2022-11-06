@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
@@ -27,6 +28,10 @@ public class Animal extends BaseEntity{
    private Animal parentescoAnimal;
    
    private String especie;
+   
+   @ManyToOne
+   @JoinColumn(name = "fazenda_id")
+   private Fazenda fazenda;
    
    private Float peso;
    
