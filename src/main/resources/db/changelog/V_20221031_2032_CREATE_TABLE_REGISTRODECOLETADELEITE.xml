@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        
+    <changeSet id="20221031-2034-17737" author="rodrigo.bueno">
+       <preConditions  onFail="MARK_RAN">
+            <not>
+              <tableExists tableName="registro_coleta_de_leite"/>
+            </not>
+        </preConditions>
+       <createTable tableName="registro_coleta_de_leite">
+          <column name="id" type="numeric(10,0)">
+              <constraints nullable="false" primaryKey="true" primaryKeyName="pk_registro_coleta_de_leite"/>
+          </column>
+          <column name="data_da_coleta" type="timestamp"></column>
+          <column name="quantidade_de_leite_coletado" type="numeric(10,0)"></column>
+          <column name="propriedade_id" type="numeric(10,0)"></column>
+          
+       </createTable>
+          <addAutoIncrement 
+           	   columnDataType="numeric(10,0)"
+           	   columnName="id"
+           	   tableName="registro_coleta_de_leite"
+          />
+          
+          <addForeignKeyConstraint  
+       		  baseColumnNames="propriedade_id"
+		      baseTableName="registro_coleta_de_leite"
+		      constraintName="fk_propriedade_id"
+		      referencedColumnNames="id"
+		      referencedTableName="propriedade"
+		   />  
+          
+
+	      
+    </changeSet>
+	
+</databaseChangeLog>
