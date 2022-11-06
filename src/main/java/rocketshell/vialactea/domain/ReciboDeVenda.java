@@ -1,7 +1,6 @@
 package rocketshell.vialactea.domain;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.time.LocalDate;
 
 import javax.persistence.Column;

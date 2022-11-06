@@ -11,7 +11,7 @@ import rocketshell.vialactea.service.ConsultaVeterinarioService;
 
 @Controller
 @RestController
-@RequestMapping("/api/ConsultaVeterinario")
+@RequestMapping("/api/consulta-veterinario")
 public class ConsultaVeterinarioController extends BaseController<ConsultaVeterinario,ConsultaVeterinarioRepository,ConsultaVeterinarioService>{
 
 }
