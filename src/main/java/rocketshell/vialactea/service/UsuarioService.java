@@ -23,10 +23,10 @@ import rocketshell.vialactea.domain.PessoaFisica;
 import rocketshell.vialactea.domain.Usuario;
 import rocketshell.vialactea.dto.sign.SignIn;
 import rocketshell.vialactea.dto.sign.SignUp;
-import rocketshell.vialactea.repository.UsersRepository;
+import rocketshell.vialactea.repository.UsuarioRepository;
 
 @Service
-public class UsersService implements UserDetailsService {
+public class UsuarioService implements UserDetailsService {
 
   @Lazy
   @Autowired
@@ -39,7 +39,7 @@ public class UsersService implements UserDetailsService {
   private JwtTool jwtTokenTool;
 
   @Autowired
-  private UsersRepository usersRepository;
+  private UsuarioRepository usuarioRepository;
 
   @Autowired
   private PessoaFisicaService pessoaFisicaService;
@@ -52,7 +52,7 @@ public class UsersService implements UserDetailsService {
 
   @Override
   public Usuario loadUserByUsername(String email) throws UsernameNotFoundException {
-    return usersRepository.findUsuarioByEmail(email);
+    return usuarioRepository.findUsuarioByEmail(email);
   }
 
   public Jwt signIn(SignIn signIn) {
@@ -70,16 +70,16 @@ public class UsersService implements UserDetailsService {
 
   public Usuario signUp(SignUp signUp) {
 
-    if (usersRepository.existsByEmail(signUp.getEmail())) {
+    if (usuarioRepository.existsByEmail(signUp.getEmail())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email is already in use!");
     }
 
-    Usuario users = Usuario.builder()
+    Usuario usuario = Usuario.builder()
         .email(signUp.getEmail())
         .password(passwordEncoder.encode(signUp.getPassword()))
         .build();
 
-    Usuario novoUsuario = usersRepository.save(users);
+    Usuario novoUsuario = usuarioRepository.save(usuario);
 
     PessoaFisica pessoaFisicaVinculada = signUp.getPessoaFisica();
     pessoaFisicaVinculada.setUsuario(novoUsuario);
@@ -93,7 +93,7 @@ public class UsersService implements UserDetailsService {
   @PostConstruct
   public void registerAdminUser() {
 
-    if (!usersRepository.existsByEmail(this.adminUsername)) {
+    if (!usuarioRepository.existsByEmail(this.adminUsername)) {
       Usuario admin = Usuario.builder()
               .email(this.adminUsername)
               .password(passwordEncoder.encode(this.adminPassword))
@@ -101,7 +101,7 @@ public class UsersService implements UserDetailsService {
 
       admin.getRoles().add(Roles.ROLE_ADMIN);
 
-      usersRepository.save(admin);
+      usuarioRepository.save(admin);
     }
 
   }
