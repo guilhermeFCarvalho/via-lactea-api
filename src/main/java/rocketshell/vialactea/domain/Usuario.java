@@ -8,14 +8,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -38,7 +31,7 @@ import rocketshell.vialactea.config.auth.Roles;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Users implements UserDetails {
+public class Usuario implements UserDetails {
 
   private static final long serialVersionUID = 1L;
 
@@ -53,19 +46,11 @@ public class Users implements UserDetails {
   @JsonProperty(access = Access.READ_ONLY)
   private Set<Roles> roles = new HashSet<>();
 
-  @NotEmpty
-  private String firstName;
-
-  private String lastName;
-
-  private LocalDate birtdate;
 
   @Email
-  private String email;
-
   @NotEmpty
   @Column(unique = true, updatable = false)
-  private String username;
+  private String email;
 
   @NotEmpty
   @JsonProperty(access = Access.WRITE_ONLY)
@@ -78,6 +63,12 @@ public class Users implements UserDetails {
         .map(Roles::getCompositeRoles).flatMap(Set::stream))
         .collect(Collectors.toSet());
   }
+
+  @Override
+  public String getUsername() {
+    return null;
+  }
+
 
   @Override
   @JsonIgnore

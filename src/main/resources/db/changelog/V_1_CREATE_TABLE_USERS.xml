@@ -7,29 +7,15 @@
     <changeSet id="20220929-1926-17405" author="guilherme.carvalho">
        <preConditions  onFail="MARK_RAN">
             <not>
-              <tableExists tableName="users"/>
+              <tableExists tableName="usuario"/>
             </not>
         </preConditions>
-       <createTable tableName="users">
+       <createTable tableName="usuario">
             <column name="id" type="uuid">
                 <constraints unique="true" nullable="false" primaryKey="true" primaryKeyName="pk_users"/>
             </column>
-            <column name="birtdate" type="date">
-            </column>
-            <column name="email" type="varchar(100)">
-            </column>
-            <column name="first_name" type="varchar(100)">
-            </column>
-            <column name="last_name" type="varchar(100)">
-            </column>
-            <column name="password" type="varchar(100)">
-            </column>
-            <column name="username" type="varchar(100)">
-            </column>
+            <column name="email" type="varchar(100)" />
+            <column name="password" type="varchar(100)"/>
        </createTable>
-       <addAutoIncrement
-          columnDataType="numeric(10,0)"
-          columnName="id"
-          tableName="pessoa"/>
     </changeSet>
 </databaseChangeLog>

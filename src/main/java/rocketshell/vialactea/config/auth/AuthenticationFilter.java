@@ -19,12 +19,12 @@ import org.springframework.web.server.ResponseStatusException;
 
 import rocketshell.vialactea.config.auth.jwt.Jwt;
 import rocketshell.vialactea.config.auth.jwt.JwtTool;
-import rocketshell.vialactea.service.UsersService;
+import rocketshell.vialactea.service.UsuarioService;
 
 public class AuthenticationFilter extends OncePerRequestFilter {
 
   @Autowired
-  private UsersService usersService;
+  private UsuarioService usuarioService;
 
   @Autowired
   private JwtTool tokenTool;
@@ -44,9 +44,9 @@ public class AuthenticationFilter extends OncePerRequestFilter {
       Jwt jwtToken = new Jwt(authorization.replace(bearer, ""));
 
       if (tokenTool.validateJwtToken(jwtToken.getToken())) {
-        String username = tokenTool.getUsernameFromToken(jwtToken);
+        String email = tokenTool.getUsernameFromToken(jwtToken);
 
-        UserDetails userDetails = usersService.loadUserByUsername(username);
+        UserDetails userDetails = usuarioService.loadUserByUsername(email);
 
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
             null,
