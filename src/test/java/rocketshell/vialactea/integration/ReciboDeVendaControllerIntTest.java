@@ -26,7 +26,7 @@ public class ReciboDeVendaControllerIntTest extends IntegrationTest {
 	
 	@Test
 	@SneakyThrows
-    void shouldDeleteCurso() {
+    void shouldDeleteReciboDeVenda() {
 		BigDecimal bigdecimal = new BigDecimal(200);
 		LocalDate data = LocalDate.now();
 		PessoaJuridica pessoaJuridica = new PessoaJuridica();
@@ -63,6 +63,6 @@ public class ReciboDeVendaControllerIntTest extends IntegrationTest {
         assertFalse(findById.isPresent());
 
     }
-
+	
 
 }
