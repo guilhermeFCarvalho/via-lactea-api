@@ -1,5 +1,7 @@
 package rocketshell.vialactea.integration;
 
+import java.math.BigDecimal;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,9 +17,12 @@ public class ReciboDeVendaControllerIntTest extends IntegrationTest {
 	@Test
 	@SneakyThrows
     void shouldDeleteCurso() {
+		BigDecimal bigdecimal = new BigDecimal(200);
         ReciboDeVenda reciboDeVenda = new ReciboDeVenda();
         reciboDeVenda.setObservacoes("observação do registro de venda");
         reciboDeVenda.setPago(true);
+        reciboDeVenda.setQuantidadeLeiteVendida(bigdecimal);
+        
         //curso.setNome("Deletar este curso");
        // curso = cursoRepository.save(curso);
 
