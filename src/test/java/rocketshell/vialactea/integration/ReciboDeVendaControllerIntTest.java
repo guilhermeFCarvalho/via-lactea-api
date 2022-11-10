@@ -2,11 +2,13 @@ package rocketshell.vialactea.integration;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.math.BigDecimal;
@@ -113,6 +115,37 @@ public class ReciboDeVendaControllerIntTest extends IntegrationTest {
 	        assertTrue(reciboDeVendaResponse.getObservacoes().equals("observação do registro de venda"));
 
 	 }
+	 
+	 @Test
+	 @SneakyThrows
+	 void shouldUpdateReciboDeVenda() {
+		 BigDecimal bigdecimal = new BigDecimal(200);
+		 ReciboDeVenda reciboDeVenda = new ReciboDeVenda();
+		 reciboDeVenda.setObservacoes("observação alterada");
+		 LocalDate data = LocalDate.now();
+		 reciboDeVenda.setPago(true);
+	     reciboDeVenda.setQuantidadeLeiteVendida(bigdecimal);
+	     reciboDeVenda.setDataDaVenda(data);
+		 
+		 reciboDeVenda = reciboDeVendaRepository.save(reciboDeVenda);
+		 
+		 String jsonReciboDeVendaString = objectMapper.writeValueAsString(reciboDeVenda);
+		 
+		 MvcResult result = mockMvc.perform(put("/api/recibo-de-venda/" + reciboDeVenda.getId())
+	                .contentType(MediaType.APPLICATION_JSON)
+	                .content(jsonReciboDeVendaString))
+	                .andExpect(status().is2xxSuccessful())
+	                .andReturn();
+
+		 ReciboDeVenda reciboDeVendaResponse = objectMapper.readValue(result.getResponse().getContentAsString(), ReciboDeVenda.class);
+		 
+		 assertEquals(reciboDeVenda.getId().toString(), reciboDeVendaResponse.getId().toString());
+	     assertEquals("observação alterada", reciboDeVendaResponse.getObservacoes());
+	     
+
+		 
+	 }
+
 
 
 }
