@@ -131,7 +131,7 @@ public class ReciboDeVendaControllerIntTest extends IntegrationTest {
 		 
 		 String jsonReciboDeVendaString = objectMapper.writeValueAsString(reciboDeVenda);
 		 
-		 MvcResult result = mockMvc.perform(put("/api/recibo-de-venda/" + reciboDeVenda.getId())
+		 MvcResult result = mockMvc.perform(put("/api/recibo-de-venda/" + reciboDeVenda.getId().toString())
 	                .contentType(MediaType.APPLICATION_JSON)
 	                .content(jsonReciboDeVendaString))
 	                .andExpect(status().is2xxSuccessful())
@@ -145,6 +145,23 @@ public class ReciboDeVendaControllerIntTest extends IntegrationTest {
 
 		 
 	 }
+	 
+	 
+	 @Test
+	 @SneakyThrows
+	 void shouldThrowNotFoundErrorWhenUpdateReciboDeVendaWithNotExistsId() {
+	    ReciboDeVenda reciboDeVenda = new ReciboDeVenda();
+	    reciboDeVenda.setId(400L);
+
+	    String jsonReciboDeVendaString = objectMapper.writeValueAsString(reciboDeVenda);
+
+	    mockMvc.perform(put("/api/recibo-de-venda/" + reciboDeVenda.getId().toString())
+	             .contentType(MediaType.APPLICATION_JSON)
+	             .content(jsonReciboDeVendaString))
+	             .andExpect(status().isNotFound());
+
+	    }
+
 
 
 
