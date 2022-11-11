@@ -244,6 +244,48 @@ public class ReciboDeVendaControllerIntTest extends IntegrationTest {
 		    assertEquals("1111",reciboDeVendaResponse.getPropriedade().getCar());
 		    assertEquals("22222",reciboDeVendaResponse.getPessoaJuridica().getCNPJ());
 	 }
+	 
+	 
+	 @Test
+	 @SneakyThrows
+	 void shouldFindAllReciboDeVenda() {
+		 
+		 List<String> observacoes = Arrays.asList(
+				 "observacao 1","observacao 2","observacao 3",
+				 "observacao 4","observacao 5","observacao 6",
+				 "observacao 7","observacao 8","observacao 9",
+				 "observacao 10","observacao 11","observacao 12"
+				 );
+		 
+		 observacoes.forEach(observacao -> {
+			 ReciboDeVenda reciboDeVenda = new ReciboDeVenda();
+			 reciboDeVenda.setObservacoes(observacao);
+			 reciboDeVenda.setPago(true);
+		     
+			 reciboDeVendaRepository.save(reciboDeVenda);
+		 });
+		 
+		 MvcResult result = mockMvc.perform(get("/api/recibo-de-venda/list")
+	                .contentType(MediaType.APPLICATION_JSON))
+	                .andExpect(status().isOk()).andReturn();
+
+		
+		 
+		 List<ReciboDeVenda> reciboDeVendas = objectMapper.readValue(result.getResponse().getContentAsString(StandardCharsets.UTF_8),
+				 
+				 new TypeReference<List<ReciboDeVenda>>() {
+         }
+		 
+		);
+		 
+		 
+		 assertEquals(12, reciboDeVendas.size());
+		 assertEquals("observacao 1",reciboDeVendas.get(0).getObservacoes());
+		 assertEquals(true,reciboDeVendas.get(0).getPago());
+		
+
+		
+	 }
 
 
 }
