@@ -125,25 +125,28 @@ public class ReciboDeVendaControllerIntTest extends IntegrationTest {
 	 @Test
 	 @SneakyThrows
 	 void shouldUpdateReciboDeVenda() {
-		 BigDecimal bigdecimal = new BigDecimal(200);
+
+
 		 ReciboDeVenda reciboDeVenda = new ReciboDeVenda();
+
 		 reciboDeVenda.setObservacoes("observação alterada");
-		 LocalDate data = LocalDate.now();
 		 reciboDeVenda.setPago(true);
-	     reciboDeVenda.setQuantidadeLeiteVendida(bigdecimal);
-	     reciboDeVenda.setDataDaVenda(data);
-		 
+	     reciboDeVenda.setQuantidadeLeiteVendida(BigDecimal.valueOf(200));
+	     reciboDeVenda.setDataDaVenda(LocalDate.now());
+	     
 		 reciboDeVenda = reciboDeVendaRepository.save(reciboDeVenda);
 		 
 		 String jsonReciboDeVendaString = objectMapper.writeValueAsString(reciboDeVenda);
 		 
-		 MvcResult result = mockMvc.perform(put("/api/recibo-de-venda/" + reciboDeVenda.getId().toString())
+		 MvcResult result = mockMvc.perform(put("/api/recibo-de-venda/" + reciboDeVenda.getId())
 	                .contentType(MediaType.APPLICATION_JSON)
 	                .content(jsonReciboDeVendaString))
 	                .andExpect(status().is2xxSuccessful())
 	                .andReturn();
-
-		 ReciboDeVenda reciboDeVendaResponse = objectMapper.readValue(result.getResponse().getContentAsString(), ReciboDeVenda.class);
+		 
+		 String res = result.getResponse().getContentAsString();
+		 
+		 ReciboDeVenda reciboDeVendaResponse = objectMapper.readValue(res, ReciboDeVenda.class);
 		 
 		 assertEquals(reciboDeVenda.getId().toString(), reciboDeVendaResponse.getId().toString());
 	     assertEquals("observação alterada", reciboDeVendaResponse.getObservacoes());
