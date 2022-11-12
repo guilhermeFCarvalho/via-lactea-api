@@ -32,6 +32,7 @@ import rocketshell.vialactea.domain.PessoaJuridica;
 import rocketshell.vialactea.domain.Propriedade;
 import rocketshell.vialactea.domain.ReciboDeVenda;
 import rocketshell.vialactea.repository.ReciboDeVendaRepository;
+import utils.CustomPageImpl;
 
 public class ReciboDeVendaControllerIntTest extends IntegrationTest {
 
@@ -177,10 +178,10 @@ public class ReciboDeVendaControllerIntTest extends IntegrationTest {
 	 void shouldFindAllPageableReciboDeVenda() {
 		 
 		 List<String> observacoes = Arrays.asList(
-				 "observacao 1","observacao 2","observacao 3",
-				 "observacao 4","observacao 5","observacao 6",
-				 "observacao 7","observacao 8","observacao 9",
-				 "observacao 10","observacao 11","observacao 12"
+				 "a-observacao 1","c-observacao 2","e-observacao 3",
+				 "d-observacao 4","b-observacao 5","f-observacao 6",
+				 "h-observacao 7","g-observacao 8","i-observacao 9",
+				 "j-observacao 10","k-observacao 11","l-observacao 12"
 				 );
 		 
 		 observacoes.forEach(observacao -> {
@@ -189,17 +190,22 @@ public class ReciboDeVendaControllerIntTest extends IntegrationTest {
 			 reciboDeVendaRepository.save(reciboDeVenda);
 		 });
 		 
-		 MvcResult result = mockMvc.perform(get("/api/recibo-de-venda?size=2")
+		 MvcResult result = mockMvc.perform(get("/api/recibo-de-venda?size=2&sort=observacoes")
 	                .contentType(MediaType.APPLICATION_JSON))
 	                .andExpect(status().isOk()).andReturn();
 
 		 
 		 
 		 Page<ReciboDeVenda> pageReciboDeVenda = objectMapper.readValue(result.getResponse().getContentAsString(StandardCharsets.UTF_8),
-	                new TypeReference<Page<ReciboDeVenda>>() {
-	    });
+				 new TypeReference<CustomPageImpl<ReciboDeVenda>>() {
+         });
+
 		 
 		 assertEquals(2, pageReciboDeVenda.getSize());
+		 assertThat(pageReciboDeVenda.getContent()).hasSize(2)
+           .extracting(ReciboDeVenda::getObservacoes)
+           .containsExactlyInAnyOrder("a-observacao 1", "b-observacao 5");
+
 
 
 		
