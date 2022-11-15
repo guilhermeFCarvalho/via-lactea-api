@@ -44,12 +44,12 @@ public class BaseController<
   }
 
   @PutMapping("/{id}")
-  public void update(@PathVariable("id") Long id, @RequestBody ENTITY entidade) {
+  public ENTITY update(@PathVariable("id") Long id, @RequestBody ENTITY entidade) {
 	  if (!id.equals(entidade.getId())) {
           throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id from the url must be the same from supplied in the request body ");
       }
 
-    service.updateEntity(entidade);
+    return service.updateEntity(entidade);
   }
 
 }

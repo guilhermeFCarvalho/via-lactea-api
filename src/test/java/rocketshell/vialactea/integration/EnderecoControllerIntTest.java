@@ -1,19 +1,18 @@
 package rocketshell.vialactea.integration;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.math.BigDecimal;
+
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -28,9 +27,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 
 import lombok.SneakyThrows;
 import rocketshell.vialactea.domain.Endereco;
-import rocketshell.vialactea.domain.PessoaJuridica;
-import rocketshell.vialactea.domain.Propriedade;
-import rocketshell.vialactea.domain.ReciboDeVenda;
 import rocketshell.vialactea.repository.EnderecoRepository;
 import utils.CustomPageImpl;
 
@@ -236,7 +232,7 @@ public class EnderecoControllerIntTest extends IntegrationTest {
 
 		 Endereco endereco = new Endereco();
 		 
-		 endereco.setRua("avenida Brasil alterada");
+		 endereco.setRua("avenida Brasil");
 		 endereco.setBairro("centro");
 		 endereco.setCep("87050-465");
 		 endereco.setCidade("Cianorte");
@@ -244,6 +240,9 @@ public class EnderecoControllerIntTest extends IntegrationTest {
 		 endereco.setNumero("800");
 
 		 endereco = enderecoRepository.save(endereco);
+		 
+		 endereco.setRua("avenida Brasil Alterada");
+		 
 		 
 		 String jsonEnderecoString = objectMapper.writeValueAsString(endereco);
 		 
@@ -253,12 +252,18 @@ public class EnderecoControllerIntTest extends IntegrationTest {
 	                .andExpect(status().is2xxSuccessful())
 	                .andReturn();
 		 
-		 String res = result.getResponse().getContentAsString();
+		 String res = result.getResponse().getContentAsString(StandardCharsets.UTF_8);
 		 
-		 Endereco EnderecoResponse = objectMapper.readValue(res, Endereco.class);
+		 Endereco enderecoResponse = objectMapper.readValue(res, Endereco.class);
 		 
-		 assertEquals(endereco.getId().toString(), endereco.getId().toString());
-	     assertEquals("avenida Brasil alterada", endereco.getCidade());
+		 assertEquals(endereco.getId().toString(), enderecoResponse.getId().toString());
+	     assertEquals("avenida Brasil Alterada", enderecoResponse.getRua());
+	     assertNotEquals("avenida Brasil", enderecoResponse.getRua());
+	     assertEquals("centro", enderecoResponse.getBairro());
+	     assertEquals("Cianorte", enderecoResponse.getCidade());
+	     assertEquals("Paraná", enderecoResponse.getEstado());
+	     assertEquals("800", enderecoResponse.getNumero());
+	     assertEquals("87050-465", enderecoResponse.getCep());
 	     
 
 		 

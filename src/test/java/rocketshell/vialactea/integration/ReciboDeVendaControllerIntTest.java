@@ -2,6 +2,7 @@ package rocketshell.vialactea.integration;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.BigDecimalConversion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
@@ -137,6 +139,7 @@ public class ReciboDeVendaControllerIntTest extends IntegrationTest {
 	     
 		 reciboDeVenda = reciboDeVendaRepository.save(reciboDeVenda);
 		 
+		 
 		 String jsonReciboDeVendaString = objectMapper.writeValueAsString(reciboDeVenda);
 		 
 		 MvcResult result = mockMvc.perform(put("/api/recibo-de-venda/" + reciboDeVenda.getId())
@@ -145,12 +148,15 @@ public class ReciboDeVendaControllerIntTest extends IntegrationTest {
 	                .andExpect(status().is2xxSuccessful())
 	                .andReturn();
 		 
-		 String res = result.getResponse().getContentAsString();
+		 String res = result.getResponse().getContentAsString(StandardCharsets.UTF_8);
 		 
 		 ReciboDeVenda reciboDeVendaResponse = objectMapper.readValue(res, ReciboDeVenda.class);
 		 
 		 assertEquals(reciboDeVenda.getId().toString(), reciboDeVendaResponse.getId().toString());
 	     assertEquals("observação alterada", reciboDeVendaResponse.getObservacoes());
+	     assertNotEquals("observação", reciboDeVendaResponse.getObservacoes());
+	     assertEquals(true, reciboDeVendaResponse.getPago());
+	     assertEquals(BigDecimal.valueOf(200), reciboDeVendaResponse.getQuantidadeLeiteVendida());
 	     
 
 		 

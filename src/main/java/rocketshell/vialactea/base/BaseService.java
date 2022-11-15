@@ -43,9 +43,9 @@ public class BaseService<
     repository.deleteById(id);
   }
 
-  public void updateEntity(ENTITY updateEntity) {
+  public ENTITY updateEntity(ENTITY updateEntity) {
 	checkIfExistsId(updateEntity.getId());
-    repository.save(updateEntity);
+    return repository.save(updateEntity);
   }
   
   public void checkIfExistsId(Long id) {
