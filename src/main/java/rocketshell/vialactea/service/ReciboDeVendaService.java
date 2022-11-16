@@ -21,4 +21,8 @@ public class ReciboDeVendaService extends BaseService<ReciboDeVenda, ReciboDeVen
         return repository.findReciboDeVendaByPropriedadeId(id,pageble);
     }
 
+    public ReciboDeVenda buscarUltimoRegistroDaPropriedade(Long id) {
+        return repository.findFirstByPropriedadeIdOrderByIdDesc(id);
+    }
+
 }
