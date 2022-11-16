@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,9 +31,6 @@ public class Animal extends BaseEntity{
    
    private String especie;
    
-   @ManyToOne
-   @JoinColumn(name = "fazenda_id")
-   private Fazenda fazenda;
    
    private Float peso;
    
@@ -40,9 +39,11 @@ public class Animal extends BaseEntity{
    @Column(name = "quantidade_de_crias")
    private int quantidadeDeCrias;
    
+   @JsonFormat(pattern = "dd/MM/yyyy")
    @Column(name = "data_de_nascimento")
    private Date dataDeNascimento;
    
+   @JsonFormat(pattern = "dd/MM/yyyy")
    @Column(name = "data_ultima_gestacao")
    private Date dataUltimaGestacao;
    
@@ -58,5 +59,8 @@ public class Animal extends BaseEntity{
    @Enumerated(EnumType.STRING)
    private Sexo sexo;
    
+   @ManyToOne
+   @JoinColumn(name = "fazenda_id")
+   private Fazenda fazenda;
    
 }
