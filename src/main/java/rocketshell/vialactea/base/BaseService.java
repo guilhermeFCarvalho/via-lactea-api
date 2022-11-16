@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -23,6 +25,7 @@ public class BaseService<
   }
 
   public ENTITY getById(Long id) {
+	checkIfExistsId(id);
     return repository.findById(id).get();
   }
 
@@ -36,11 +39,20 @@ public class BaseService<
   }
 
   public void deleteById(Long id) {
+	checkIfExistsId(id);
     repository.deleteById(id);
   }
 
-  public void updateEntity(ENTITY updateEntity) {
-    repository.save(updateEntity);
+  public ENTITY updateEntity(ENTITY updateEntity) {
+	checkIfExistsId(updateEntity.getId());
+    return repository.save(updateEntity);
   }
+  
+  public void checkIfExistsId(Long id) {
+      if (id == null || !this.repository.findById(id).isPresent()) {
+          throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Entity not found!");
+      }
+  }
+
 
 }
