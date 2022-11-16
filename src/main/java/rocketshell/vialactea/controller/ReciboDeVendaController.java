@@ -32,4 +32,10 @@ public class ReciboDeVendaController extends BaseController<ReciboDeVenda,
         return ResponseEntity.ok(service.listarRecibosDeUmaPropriedade(id,pageable));
     }
 
+    @GetMapping("/propriedade/{id}/ultimo-registro")
+    public ResponseEntity<ReciboDeVenda> ultimoRegitro(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(service.buscarUltimoRegistroDaPropriedade(id));
+    }
+
+
 }

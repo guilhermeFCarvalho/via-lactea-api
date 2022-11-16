@@ -12,5 +12,7 @@ public interface ReciboDeVendaRepository extends JpaRepository<ReciboDeVenda, Lo
 
     Page<ReciboDeVenda> findReciboDeVendaByPropriedadeId(Long id, Pageable pageable);
 
+    ReciboDeVenda findFirstByPropriedadeIdOrderByIdDesc(Long id);
+
 
 }
