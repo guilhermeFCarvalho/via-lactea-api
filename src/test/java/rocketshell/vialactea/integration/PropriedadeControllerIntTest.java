@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -286,10 +287,63 @@ public class PropriedadeControllerIntTest extends IntegrationTest{
 	 }
 	 
 	 
+	 @Test
+	 @SneakyThrows
+	 void shouldUpdatePropriedade() {
+
+
+		 Endereco endereco = new Endereco();
+		 
+		 endereco.setRua("estrada do boi alterada");
+		 endereco.setBairro("km324 alterada");
+		 endereco.setCep("87050-465 alterada");
+		 endereco.setCidade("Maringá alterada");
+		 endereco.setEstado("Paraná alterada");
+		 endereco.setNumero("600 alterada");
+		 
+		 Fazenda fazenda = new Fazenda();
+		 fazenda.setEndereco(endereco);
+		 fazenda.setNomeDaFazenda("fazenda das aguas alterada");
+		 
+		 Propriedade propriedade = new Propriedade();
+		 
+		 propriedade.setCar("35005500200507-alterada");
+		 propriedade.setTelefone("34443636-alterada");
+		 propriedade.setFazenda(fazenda);
+
+		 propriedade = propriedadeRepository.save(propriedade);
+		 
+		 
+		 String jsonPropriedadeString = objectMapper.writeValueAsString(propriedade);
+		 
+		 MvcResult result = mockMvc.perform(put("/api/propriedades/" + propriedade.getId())
+	                .contentType(MediaType.APPLICATION_JSON)
+	                .content(jsonPropriedadeString))
+	                .andExpect(status().is2xxSuccessful())
+	                .andReturn();
+		 
+		 String res = result.getResponse().getContentAsString(StandardCharsets.UTF_8);
+		 
+		 Propriedade propriedadeResponse = objectMapper.readValue(res, Propriedade.class);
+		 
+		 assertEquals(propriedade.getId().toString(), propriedadeResponse.getId().toString());
+	     assertEquals("estrada do boi alterada", propriedadeResponse.getFazenda().getEndereco().getRua());
+	     assertEquals("km324 alterada", propriedadeResponse.getFazenda().getEndereco().getBairro());
+	     assertEquals("87050-465 alterada", propriedadeResponse.getFazenda().getEndereco().getCep());
+	     assertEquals("Maringá alterada", propriedadeResponse.getFazenda().getEndereco().getCidade());
+	     assertEquals("Paraná alterada", propriedadeResponse.getFazenda().getEndereco().getEstado());
+	     assertEquals("600 alterada", propriedadeResponse.getFazenda().getEndereco().getNumero());
+	     assertEquals("fazenda das aguas alterada", propriedadeResponse.getFazenda().getNomeDaFazenda());
+	     assertEquals("35005500200507-alterada", propriedadeResponse.getCar());
+	     assertNotEquals("35005500200507", propriedadeResponse.getCar());
+	     assertEquals("34443636-alterada",propriedadeResponse.getTelefone());
+	     assertNotEquals("34443636",propriedadeResponse.getTelefone());
+	     
+		 
+	 }
 	 
-
-
-
-
-
+	 
+	
 }
+
+
