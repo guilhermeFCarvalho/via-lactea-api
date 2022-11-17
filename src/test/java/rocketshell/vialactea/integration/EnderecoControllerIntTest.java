@@ -102,7 +102,7 @@ public class EnderecoControllerIntTest extends IntegrationTest {
 
 	    String jsonEnderecoString = objectMapper.writeValueAsString(endereco);
 
-	    mockMvc.perform(put("/api/endereco/" + endereco.getId().toString())
+	    mockMvc.perform(put("/api/enderecos/" + endereco.getId().toString())
 	             .contentType(MediaType.APPLICATION_JSON)
 	             .content(jsonEnderecoString))
 	             .andExpect(status().isNotFound());
