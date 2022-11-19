@@ -1,31 +1,21 @@
 package rocketshell.vialactea.integration;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import rocketshell.vialactea.domain.Animal;
-import rocketshell.vialactea.domain.Endereco;
 import rocketshell.vialactea.domain.Fazenda;
 import rocketshell.vialactea.domain.Sexo;
 import rocketshell.vialactea.repository.AnimalRepository;
-import rocketshell.vialactea.repository.EnderecoRepository;
 import rocketshell.vialactea.repository.FazendaRepository;
-import utils.CustomPageImpl;
 
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.InstanceOfAssertFactories.BIG_DECIMAL;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;

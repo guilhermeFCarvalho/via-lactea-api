@@ -2,9 +2,7 @@ package rocketshell.vialactea.domain;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
-import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -13,6 +11,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import rocketshell.vialactea.base.BaseEntity;
+
+import javax.persistence.*;
 
 
 @Entity
