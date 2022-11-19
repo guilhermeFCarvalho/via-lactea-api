@@ -1,5 +1,6 @@
 package rocketshell.vialactea.domain;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -41,11 +42,11 @@ public class Animal extends BaseEntity{
    
    @JsonFormat(pattern = "dd/MM/yyyy")
    @Column(name = "data_de_nascimento")
-   private Date dataDeNascimento;
+   private LocalDate dataDeNascimento;
    
    @JsonFormat(pattern = "dd/MM/yyyy")
    @Column(name = "data_ultima_gestacao")
-   private Date dataUltimaGestacao;
+   private LocalDate dataUltimaGestacao;
    
    @Column(name = "tipo_alimentacao")
    private String tipoAlimentacao;
