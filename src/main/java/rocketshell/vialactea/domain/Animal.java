@@ -21,7 +21,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Animal extends BaseEntity{
 	
-   @OneToOne(cascade = CascadeType.ALL)
+   @OneToOne
    @JoinColumn(name = "parentesco_animal_id")
    private Animal parentescoAnimal;
    
